@@ -5,6 +5,7 @@ import './App.css';
 
 const WebsiteWithToxicityChecker = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
   // Refs for scroll targets
   const homeRef = useRef(null);
@@ -16,6 +17,7 @@ const WebsiteWithToxicityChecker = () => {
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -29,20 +31,20 @@ const WebsiteWithToxicityChecker = () => {
 
           {/* Desktop Navigation */}
           <div className="nav-links">
-            <button onClick={() => scrollToSection(homeRef)} className="nav-link">Home</button>
-            <button onClick={() => scrollToSection(aboutRef)} className="nav-link">About Us</button>
-            <button onClick={() => scrollToSection(processRef)} className="nav-link">Work Process</button>
-            <button onClick={() => scrollToSection(teamRef)} className="nav-link">Our Team</button>
-            <button onClick={() => scrollToSection(contactRef)} className="nav-link">Contact</button>
+            <a onClick={() => scrollToSection(homeRef)} className="nav-link">Home</a>
+            <a onClick={() => scrollToSection(aboutRef)} className="nav-link">About Us</a>
+            <a onClick={() => scrollToSection(processRef)} className="nav-link">Work Process</a>
+            <a onClick={() => scrollToSection(teamRef)} className="nav-link">Our Team</a>
+            <a onClick={() => scrollToSection(contactRef)} className="nav-link">Contact</a>
           </div>
 
           {/* Mobile menu button */}
           <div className="mobile-menu-button">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <div className="h-6 w-6 flex flex-col justify-between">
-                <span className={`block h-0.5 w-6 bg-current transform transition duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`} />
-                <span className={`block h-0.5 w-6 bg-current transition duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
-                <span className={`block h-0.5 w-6 bg-current transform transition duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
+                <span className={`block h-1 w-8 bg-current transform transition duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`} />
+                <span className={`block h-1 w-8 bg-current transition duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
+                <span className={`block h-1 w-8 bg-current transform transition duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
               </div>
             </button>
           </div>

@@ -68,6 +68,10 @@ const ToxicityChecker = () => {
   };
 
   const analyzeToxicity = async () => {
+    if (!text.trim()) {
+        setError('Please enter some text to analyze.');
+        return;
+      }
     try {
       const mockResponse = { score: Math.floor(Math.random() * 100) };
       setToxicityScore(mockResponse.score);

@@ -139,7 +139,7 @@ body {
   border-radius: 6px;
   background-color: var(--card-background);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
