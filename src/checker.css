@@ -1,0 +1,194 @@
+/* Font imports for different scripts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleas.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gurmukhi:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
+
+/* Base styles */
+:root {
+  --primary-color: #10b981;
+  --primary-dark: #059669;
+  --primary-light: #d1fae5;
+  --danger-color: #ef4444;
+  --success-color: #22c55e;
+  --warning-color: #f59e0b;
+  --background-color: #f9fafb;
+  --card-background: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.main-content {
+  max-width: 800px;
+  margin: 4.5rem auto 2rem;
+  padding: 0 1rem;
+}
+
+.card {
+  background-color: var(--card-background);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+/* Form elements */
+.input-group {
+  margin-bottom: 1.25rem;
+}
+
+.input-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.language-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background-color: var(--card-background);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Text input area with dynamic font changes */
+.text-input {
+  width: 100%;
+  min-height: 150px;
+  font-size: 1rem;
+  border-radius: 6px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Script-specific font styles */
+.text-input.script-latin { font-family: 'Noto Sans', sans-serif; }
+.text-input.script-bengali { font-family: 'Noto Sans Bengali', sans-serif; }
+.text-input.script-devanagari { font-family: 'Noto Sans Devanagari', sans-serif; }
+.text-input.script-gujarati { font-family: 'Noto Sans Gujarati', sans-serif; }
+.text-input.script-gurmukhi { font-family: 'Noto Sans Gurmukhi', sans-serif; }
+.text-input.script-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
+.text-input.script-telugu { font-family: 'Noto Sans Telugu', sans-serif; }
+.text-input.script-arabic { font-family: 'Noto Nastaliq Urdu', sans-serif; }
+
+/* On-screen keyboard container (Keyman) */
+.keymanweb-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--card-background);
+  border-top: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+}
+
+/* Prevent textarea from being blocked by keyboard */
+.text-input {
+  padding-bottom: 100px;
+}
+
+/* Button styles */
+.mic-button,
+.keyboard-button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--card-background);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.mic-button:hover,
+.keyboard-button:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+}
+
+.keyboard-button.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* Analyze button */
+.analyze-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.analyze-button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .main-content {
+    margin-top: 4rem;
+    padding: 0 0.75rem;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+  }
+  
+  .keymanweb-container {
+    height: auto;
+  }
+}
