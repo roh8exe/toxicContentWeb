@@ -273,6 +273,56 @@ body {
   resize: vertical;
 }
 
+/* Profile Section Styles */
+.profile-section {
+  border-top: 1px solid var(--border-color);
+}
+
+.profile-content {
+  padding: 2rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+}
+
+.social-link.twitter:hover {
+  background-color: #1DA1F2;
+  color: white;
+}
+
+.social-link.linkedin:hover {
+  background-color: #0A66C2;
+  color: white;
+}
+
+.social-link.github:hover {
+  background-color: #24292F;
+  color: white;
+}
+
+.social-link.youtube:hover {
+  background-color: #FF0000;
+  color: white;
+}
+
+.address-info {
+  font-style: italic;
+  line-height: 1.6;
+}
+
 /* Button styles */
 .button {
   display: inline-block;

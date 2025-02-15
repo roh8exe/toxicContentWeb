@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { ChevronDown, Users, Info, Phone, GitBranch } from 'lucide-react';
+import { ChevronDown, Users} from 'lucide-react';
+import { Twitter, Linkedin, Github, Youtube} from 'lucide-react';
+import 'react-transliterate/dist/index.css';
 import ToxicityChecker from './checker.js';
 import './App.css';
 
@@ -147,6 +149,40 @@ const WebsiteWithToxicityChecker = () => {
           </form>
         </div>
       </section>
+      <section className="profile-section bg-white py-16">
+      <div className="section-container">
+        <div className="profile-content text-center max-w-3xl mx-auto">
+          {/* Profile Name */}
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Prof. Mayank Singh</h2>
+          
+          {/* Address */}
+          <div className="address-info text-gray-600 mb-8 space-y-2">
+            <p>AB 13/402 B,</p>
+            <p>Indian Institute of Technology Gandhinagar</p>
+            <p>Palaj, Gandhinagar – 382355, Gujarat</p>
+          </div>
+
+          {/* Social Media Links */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
+            <div className="flex justify-center gap-6">
+              <a href="https://x.com/lingoiitgn" className="social-link twitter" target="_blank" rel="noopener noreferrer">
+                <Twitter size={24} />
+              </a>
+              <a href="https://www.linkedin.com/company/lingo-labs-iitgn/" className="social-link linkedin" target="_blank" rel="noopener noreferrer">
+                <Linkedin size={24} />
+              </a>
+              <a href="https://github.com/lingo-iitgn" className="social-link github" target="_blank" rel="noopener noreferrer">
+                <Github size={24} />
+              </a>
+              <a href="https://www.youtube.com/@LingoResearchGroupIITGN" className="social-link youtube" target="_blank" rel="noopener noreferrer">
+                <Youtube size={24} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     </div>
   );
 };
