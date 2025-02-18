@@ -90,7 +90,7 @@ const ToxicityChecker = () => {
       <div className="main-content">
         <div className="card">
           <div className="card-header">
-            <h1 className="card-title">Content Toxicity Analyzer</h1>
+            <h1 className="card-title" >Content Toxicity Analyzer</h1>
           </div>
           <div className="card-content">
             {error && <div className="error-message">{error}</div>}

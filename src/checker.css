@@ -17,11 +17,11 @@
   --danger-color: #ef4444;
   --success-color: #22c55e;
   --warning-color: #f59e0b;
-  --background-color: #f9fafb;
-  --card-background: #ffffff;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --border-color: #e5e7eb;
+  --background-color: #1a1a1a;
+  --card-background: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --border-color: #4b5563;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
@@ -54,6 +54,12 @@ body {
   border: 1px solid var(--border-color);
   padding: 1.5rem;
 }
+.card_title {
+  font-weight: bold;
+  color: var(--text-secondary); /* Light gray for card title */
+  text-align: center;
+  margin-bottom: 8px;
+}
 
 /* Form elements */
 .input-group {
@@ -75,6 +81,7 @@ body {
   border-radius: 6px;
   font-size: 0.875rem;
   background-color: var(--card-background);
+  color: var(--text-primary);
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -93,7 +100,8 @@ body {
   border-radius: 6px;
   padding: 10px;
   border: 1px solid var(--border-color);
-  background-color: var(--background-color);
+  background-color: var(--card-background);
+  color: var(--text-primary);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -138,6 +146,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   background-color: var(--card-background);
+  color: var(--text-primary);
   cursor: pointer;
   transition: background-color 0.3s;
   display: flex;
