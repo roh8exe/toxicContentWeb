@@ -331,7 +331,6 @@ body {
 /* Profile Section Styles */
 .profile-section {
   background: var(--background-gradient-start);
-  border-top: 1px solid var(--border-color);
 }
 
 .profile-content {
