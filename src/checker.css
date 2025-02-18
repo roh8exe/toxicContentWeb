@@ -1,6 +1,6 @@
 /* Font imports for different scripts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleas.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap');
@@ -100,14 +100,16 @@ body {
   border-radius: 6px;
   padding: 10px;
   border: 1px solid var(--border-color);
-  background-color: var(--card-background);
+  background-color: transparent;
   color: var(--text-primary);
   transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-shadow: none;
 }
 
 .text-input:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border: none;
   box-shadow: 0 0 0 3px var(--primary-light);
 }
 
@@ -122,17 +124,24 @@ body {
 .text-input.script-arabic { font-family: 'Noto Nastaliq Urdu', sans-serif; }
 
 /* On-screen keyboard container (Keyman) */
-.keymanweb-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: var(--card-background);
-  border-top: 1px solid var(--border-color);
-  box-shadow: var(--shadow-lg);
-  z-index: 1000;
+.custom-suggestion-box {
+  border: none !important; /* Remove border */
+  background-color: transparent !important; /* Remove background */
+  box-shadow: none !important;/* Match your theme's border color */
 }
 
+/* Override individual suggestion items */
+.custom-suggestion-box li {
+  background-color: var(--card-background) !important; /* Use your dark theme color */
+  color: var(--text-primary) !important; /* Ensure text is visible */
+}
+
+/* Override active/focused suggestion items */
+.custom-suggestion-box li:hover,
+.custom-suggestion-box li:focus {
+  background-color: var(--primary-color) !important; /* Use your theme's primary color */
+  color: white !important;
+}
 /* Prevent textarea from being blocked by keyboard */
 .text-input {
   padding-bottom: 100px;

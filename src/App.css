@@ -65,6 +65,10 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
+.nav-bar.scrolled {
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 .app-title {
   font-size: 2.5rem; /* Increased font size for the title */
@@ -126,10 +130,17 @@ body {
 
   .mobile-menu-button {
     display: block;
+    height: 70%;
+    width: 10%;
+  }
+  .mobile-menu-button button{
+    height: 100%;
+    width: 100%;
   }
 
   .mobile-menu {
     position: absolute;
+
     top: 4rem;
     left: 0;
     right: 0;
@@ -167,6 +178,7 @@ body {
   text-align: center;
   background: var(--background-gradient-start);
 }
+
 
 .hero-title {
   font-size: 3.5rem;
@@ -224,6 +236,8 @@ body {
   transform: translateX(-100%);
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
+
+
 .process-step:nth-child(odd) {
   animation: slideInFromLeft 0.5s ease forwards;
 }
@@ -246,7 +260,7 @@ body {
 }
 
 .process-step:hover {
-  transform: translateY(-5px);
+  transform: translateY(-25px);
 }
 .process-step.visible {
   opacity: 1;
@@ -267,27 +281,6 @@ body {
 }
 
 /* Team Section */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-}
-
-.team-member {
-  text-align: center;
-  padding: 2rem;
-}
-
-.team-avatar {
-  width: 8rem;
-  height: 8rem;
-  margin: 0 auto 1.5rem;
-  background: var(--primary-light);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* Contact Form */
 .contact-form {

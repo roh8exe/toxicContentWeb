@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { ChevronDown, Users} from 'lucide-react';
-import { Twitter, Linkedin, Github, Youtube} from 'lucide-react';
+import { ChevronDown, Users } from 'lucide-react';
+import { Twitter, Linkedin, Github, Youtube } from 'lucide-react';
 import 'react-transliterate/dist/index.css';
 import ToxicityChecker from './checker.js';
+import { useEffect } from 'react';
+import TeamSlider from './TeamSlider'; // Import the TeamSlider component
+import WorkProcess from './WorkProcess.js';
 import './App.css';
 
 const WebsiteWithToxicityChecker = () => {
@@ -87,47 +90,19 @@ const WebsiteWithToxicityChecker = () => {
       </section>
 
       {/* Work Process Section */}
-      <section ref={processRef} className="section">
-        <div className="section-container">
-          <h2 className="section-title">How It Works</h2>
-          <div className="process-grid">
-            <div className="process-step">
-              <div className="step-number">1</div>
-              <h3>Input Text</h3>
-              <p>Enter or paste the content you want to analyze</p>
-            </div>
-            <div className="process-step">
-              <div className="step-number">2</div>
-              <h3>Analysis</h3>
-              <p>Our AI analyzes the content for toxic elements</p>
-            </div>
-            <div className="process-step">
-              <div className="step-number">3</div>
-              <h3>Results</h3>
-              <p>Get instant feedback on content toxicity</p>
-            </div>
-          </div>
-        </div>
+      <section ref={processRef}>
+        <WorkProcess />
       </section>
 
       {/* Team Section */}
       <section ref={teamRef} className="section bg-gray-50">
         <div className="section-container">
           <h2 className="section-title">Our Team</h2>
-          <div className="team-grid">
-            {[1, 2, 3, 4].map((member) => (
-              <div key={member} className="team-member">
-                <div className="team-avatar">
-                  <Users className="w-12 h-12 text-gray-400" />
-                </div>
-                <h3>Team Member {member}</h3>
-                <p className="text-gray-600">Role Description</p>
-              </div>
-            ))}
-          </div>
+          <TeamSlider /> {/* Use TeamSlider component here */}
         </div>
       </section>
 
+      {/* Contact Section */}
       {/* Contact Section */}
       <section ref={contactRef} className="section">
         <div className="section-container">
@@ -149,7 +124,7 @@ const WebsiteWithToxicityChecker = () => {
           </form>
         </div>
       </section>
-      <section className="profile-section bg-white py-16">
+<section className="profile-section bg-white py-16">
       <div className="section-container">
         <div className="profile-content text-center max-w-3xl mx-auto">
           {/* Profile Name */}

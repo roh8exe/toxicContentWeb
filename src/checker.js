@@ -10,6 +10,7 @@ const ToxicityChecker = () => {
   const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState(null);
   const recognitionRef = useRef(null);
+  
 
   // Language mapping for transliteration
   const languages = [
@@ -116,6 +117,7 @@ const ToxicityChecker = () => {
                   value={text}
                   onChangeText={setText}
                   lang={languages.find(l => l.code === selectedLanguage)?.transliterateCode || 'en'}
+                  containerClassName="custom-suggestion-box" 
                 />
                 <button className={`mic-button ${isListening ? 'listening' : ''}`} onClick={toggleListening}>
                   🎤
