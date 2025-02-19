@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ReactTransliterate } from 'react-transliterate';
+import { Mic } from 'lucide-react';
 import 'react-transliterate/dist/index.css';
 import './checker.css';
 
@@ -120,7 +121,7 @@ const ToxicityChecker = () => {
                   containerClassName="custom-suggestion-box" 
                 />
                 <button className={`mic-button ${isListening ? 'listening' : ''}`} onClick={toggleListening}>
-                  🎤
+                <Mic size={20} />
                 </button>
               </div>
             </div>
