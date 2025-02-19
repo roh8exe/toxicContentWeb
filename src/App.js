@@ -45,14 +45,14 @@ const WebsiteWithToxicityChecker = () => {
 
           {/* Mobile menu button */}
           <div className="mobile-menu-button">
-           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <div className="h-6 w-6 flex flex-col justify-between">
-                <span className={`block h-1 w-8 bg-current transform transition duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`} />
-                <span className={`block h-1 w-8 bg-current transition duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
-                <span className={`block h-1 w-8 bg-current transform transition duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
-              </div>
-            </button>
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-expanded={isMenuOpen}>
+            <div>
+           <span />
+            <span />
+           <span />
           </div>
+        </button>
+        </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -61,7 +61,7 @@ const WebsiteWithToxicityChecker = () => {
           <button onClick={() => scrollToSection(aboutRef)} className="mobile-menu-link">About Us</button>
           <button onClick={() => scrollToSection(processRef)} className="mobile-menu-link">Work Process</button>
           <button onClick={() => scrollToSection(teamRef)} className="mobile-menu-link">Our Team</button>
-          <button onClick={() => scrollToSection(contactRef)} className="mobile-menu-link">Contact</button>
+         <button onClick={() => scrollToSection(contactRef)} className="mobile-menu-link">Contact</button>
         </div>
       </nav>
 
