@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import './WorkProcess.css'; // Ensure you have a separate CSS file for styles
 
 const processSteps = [
@@ -8,48 +9,25 @@ const processSteps = [
 ];
 
 export default function WorkProcess() {
-  const stepRefs = useRef([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('pop-up');
-          }
-        });
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of the element is visible
-      }
-    );
-
-    stepRefs.current.forEach((step) => {
-      if (step) observer.observe(step);
-    });
-
-    return () => {
-      stepRefs.current.forEach((step) => {
-        if (step) observer.unobserve(step);
-      });
-    };
-  }, []);
-
   return (
     <section className="work-process-section">
       <div className="section-container">
         <h2 className="section-title">How It Works</h2>
         <div className="process-grid">
           {processSteps.map((step, index) => (
-            <div
+            <motion.div
               key={index}
               className="process-step"
-              ref={el => stepRefs.current[index] = el}
+              initial={{ opacity: 0, y: 20 }} // Start off-screen
+              whileInView={{ opacity: 1, y: 0 }} // Animate to visible
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 1.0, delay: index * 0.2 }} // Delay for sequential effect
+              viewport={{ once: false }} // Allow multiple triggers
             >
               <div className="step-number">{step.number}</div>
               <h3>{step.title}</h3>
               <p>{step.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

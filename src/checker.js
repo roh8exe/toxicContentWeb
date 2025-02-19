@@ -15,20 +15,20 @@ const ToxicityChecker = () => {
 
   // Language mapping for transliteration
   const languages = [
-    { code: 'en', name: 'English', transliterateCode: 'en' },
-    { code: 'hi', name: 'Hindi', transliterateCode: 'hi' },
+    { code: 'as', name: 'Assamese', transliterateCode: 'bn' },// Assamese uses Bengali script
     { code: 'bn', name: 'Bengali', transliterateCode: 'bn' },
+    { code: 'en', name: 'English', transliterateCode: 'en' },
     { code: 'gu', name: 'Gujarati', transliterateCode: 'gu' },
+    { code: 'hi', name: 'Hindi', transliterateCode: 'hi' },
+    { code: 'kn', name: 'Kannada', transliterateCode: 'kn' },
+    { code: 'ml', name: 'Malayalam', transliterateCode: 'ml' },
+    { code: 'mr', name: 'Marathi', transliterateCode: 'mr' },
+    { code: 'or', name: 'Odia', transliterateCode: 'or' },
     { code: 'pa', name: 'Punjabi', transliterateCode: 'pa' },
+    { code: 'sa', name: 'Sanskrit', transliterateCode: 'sa' },
     { code: 'ta', name: 'Tamil', transliterateCode: 'ta' },
     { code: 'te', name: 'Telugu', transliterateCode: 'te' },
-    { code: 'mr', name: 'Marathi', transliterateCode: 'mr' },
-    { code: 'ur', name: 'Urdu', transliterateCode: 'ur' },
-    { code: 'sa', name: 'Sanskrit', transliterateCode: 'sa' },
-    { code: 'ml', name: 'Malayalam', transliterateCode: 'ml' },
-    { code: 'kn', name: 'Kannada', transliterateCode: 'kn' },
-    { code: 'or', name: 'Odia', transliterateCode: 'or' },
-    { code: 'as', name: 'Assamese', transliterateCode: 'bn' } // Assamese uses Bengali script
+    { code: 'ur', name: 'Urdu', transliterateCode: 'ur' }
   ];
 
   // Speech recognition setup
