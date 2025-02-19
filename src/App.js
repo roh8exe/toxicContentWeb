@@ -129,7 +129,7 @@ const WebsiteWithToxicityChecker = () => {
 
       {/* Contact Section */}
       {/* Contact Section */}
-      <section className="section">
+      <section ref={contactRef} className="section">
       <div className="section-container">
         <h2 className="section-title">Contact Us</h2>
         <form className="contact-form" onSubmit={handleSubmit}>
