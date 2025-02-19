@@ -11,7 +11,32 @@ import './App.css';
 const WebsiteWithToxicityChecker = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const googleScriptURL = "https://script.google.com/macros/s/AKfycbw5HxxBkUp2GU45IwyUuNRmPLeCHIl1sPQFKfRWqioZWTVK-3EO-Tzcvf2rlu2Blef15Q/exec"; // Replace with your Google Apps Script URL
+
+    try {
+      const response = await fetch(googleScriptURL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      alert("Message Sent Successfully!");
+      setFormData({ name: '', email: '', message: '' }); // Reset form fields
+    } catch (error) {
+      alert("Error sending message.");
+      console.error("Error:", error);
+    }
+  };
   // Refs for scroll targets
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
@@ -104,26 +129,26 @@ const WebsiteWithToxicityChecker = () => {
 
       {/* Contact Section */}
       {/* Contact Section */}
-      <section ref={contactRef} className="section">
-        <div className="section-container">
-          <h2 className="section-title">Contact Us</h2>
-          <form className="contact-form">
-            <div className="form-group">
-              <label className="form-label">Name</label>
-              <input type="text" className="form-input" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Email</label>
-              <input type="email" className="form-input" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Message</label>
-              <textarea className="form-textarea" rows="4"></textarea>
-            </div>
-            <button type="submit" className="analyze-button">Send Message</button>
-          </form>
-        </div>
-      </section>
+      <section className="section">
+      <div className="section-container">
+        <h2 className="section-title">Contact Us</h2>
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">Name</label>
+            <input type="text" name="name" className="form-input" value={formData.name} onChange={handleChange} required />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Email</label>
+            <input type="email" name="email" className="form-input" value={formData.email} onChange={handleChange} required />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Message</label>
+            <textarea name="message" className="form-textarea" rows="4" value={formData.message} onChange={handleChange} required></textarea>
+          </div>
+          <button type="submit" className="analyze-button">Send Message</button>
+        </form>
+      </div>
+    </section>
 <section className="profile-section bg-white py-16">
       <div className="section-container">
         <div className="profile-content text-center max-w-3xl mx-auto">
