@@ -122,16 +122,27 @@ body {
 .mobile-menu-button {
   display: none;
 }
-.nav-links {
-  display: none; /* Hide desktop nav links on mobile */
+
+.mobile-menu {
+  display: none;
 }
 
-
 @media (max-width: 768px) {
+  /* Hide desktop navigation on mobile */
+  .nav-links {
+    display: none;
+  }
+
+  /* Show mobile menu button on mobile */
   .mobile-menu-button {
     display: block;
     height: 70%;
     width: 10%;
+  }
+
+  /* Show mobile menu when isMenuOpen is true */
+  .mobile-menu:not(.hidden) {
+    display: block;
   }
 
   .mobile-menu-button button {
