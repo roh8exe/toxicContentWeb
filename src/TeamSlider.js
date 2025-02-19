@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
 import "./TeamSlider.css";
-import img1 from './  rohit.png'
+import img1 from './photos/mayanksingh.png'
+import img2 from './photos/Himanshu.png'
+import img5 from './photos/rohit.png'
+import img6 from './photos/Eshwar Dhande.png'
 
 const teamMembers = [
-  { name: "Member 1", role: "Developer", img: img1, email: "m1@example.com" },
-  { name: "Member 2", role: "Designer", img: "member2.jpg", email: "m2@example.com" },
-  { name: "Member 3", role: "Manager", img: "member3.jpg", email: "m3@example.com" },
-  { name: "Member 4", role: "Tester", img: "member4.jpg", email: "m4@example.com" },
-  { name: "Member 5", role: "Analyst", img: "member5.jpg", email: "m5@example.com" },
-  { name: "Member 6", role: "Researcher", img: "member6.jpg", email: "m6@example.com" },
+  { name: "Dr. Mayank Singh", role: "Supervisior", img: img1, email: "singh.mayank@iitgn.ac.in" },
+  { name: "Himanshu Beniwal", role: "Role", img: img2, email: "himanshubeniwal@iitgn.ac.in" },
+  { name: "Daksh Jain", role: "Role", img: "member3.jpg", email: "daksh.jain@iitgn.ac.in" },
+  { name: "Birudugadda Srivibhav", role: "Role", img: "member4.jpg", email: "birudugadda.srivibhav@iitgn.ac.in" },
+  { name: "Rohit Kumar", role: "Role", img: img5, email: "rohit.kumar.23063@iitgoa.ac.in" },
+  { name: "Eshwar Dhande", role: "Role", img: img6, email: "eshwar.dhande@iitgn.ac.in" },
+  { name: "Reddybathuni Venkat", role: "Role", img: "member7", email: "reddybathuni.venkat@iitgn.ac.in" },
+  { name: "Pavan Doddi", role: "Role", img: "member8", email: "pavan.doddi@iitgn.ac.in" },
 ];
 
 export default function TeamSlider() {

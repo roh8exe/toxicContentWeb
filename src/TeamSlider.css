@@ -38,7 +38,31 @@
   }
   
   .team-slide:nth-child(3) {
-    animation-delay: 0.2s; /* Slight delay for the third slide */
+    animation-delay: 0.1s; /* Slight delay for the third slide */
+  }
+
+  .team-slide:nth-child(3) {
+    animation-delay: 0.1s; /* Slight delay for the third slide */
+  }
+
+  .team-slide:nth-child(4) {
+    animation-delay: 0.1s; /* Slight delay for the third slide */
+  }
+
+  .team-slide:nth-child(5) {
+    animation-delay: 0.1s; /* Slight delay for the third slide */
+  }
+
+  .team-slide:nth-child(6) {
+    animation-delay: 0.1s; /* Slight delay for the third slide */
+  }
+
+  .team-slide:nth-child(7) {
+    animation-delay: 0.1s; /* Slight delay for the third slide */
+  }
+
+  .team-slide:nth-child(8) {
+    animation-delay: 0.1s; /* Slight delay for the third slide */
   }
   
   /* Add more delays for additional slides if needed */
