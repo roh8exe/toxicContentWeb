@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import "./TeamSlider.css";
 import img1 from './photos/mayanksingh.png'
 import img2 from './photos/Himanshu.png'
+import img3 from './photos/DakshJain.png'
 import img5 from './photos/rohit.png'
-import img6 from './photos/Eshwar Dhande.png'
+import img6 from './photos/EshwarDhande.png'
 
 const teamMembers = [
   { name: "Dr. Mayank Singh", role: "Supervisior", img: img1, email: "singh.mayank@iitgn.ac.in" },
   { name: "Himanshu Beniwal", role: "Role", img: img2, email: "himanshubeniwal@iitgn.ac.in" },
-  { name: "Daksh Jain", role: "Role", img: "member3.jpg", email: "daksh.jain@iitgn.ac.in" },
+  { name: "Daksh Jain", role: "Role", img: img3, email: "daksh.jain@iitgn.ac.in" },
   { name: "Birudugadda Srivibhav", role: "Role", img: "member4.jpg", email: "birudugadda.srivibhav@iitgn.ac.in" },
   { name: "Rohit Kumar", role: "Role", img: img5, email: "rohit.kumar.23063@iitgoa.ac.in" },
   { name: "Eshwar Dhande", role: "Role", img: img6, email: "eshwar.dhande@iitgn.ac.in" },

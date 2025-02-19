@@ -43,12 +43,18 @@ const WebsiteWithToxicityChecker = () => {
   const processRef = useRef(null);
   const teamRef = useRef(null);
   const contactRef = useRef(null);
+  const toxicityCheckerRef = useRef(null);
 
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
     setIsDropdownOpen(false);
   };
+
+  const scrollToToxicityChecker = () => {
+    toxicityCheckerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
 
   return (
     <div className="min-h-screen">
@@ -99,8 +105,12 @@ const WebsiteWithToxicityChecker = () => {
           <p className="hero-subtitle">
             Analyze and identify toxic content across multiple languages
           </p>
-          <ChevronDown className="w-8 h-8 mx-auto animate-bounce" />
-          <ToxicityChecker/>
+          <ChevronDown 
+            className="w-8 h-8 mx-auto animate-bounce"
+            onClick={scrollToToxicityChecker} />
+          <div ref={toxicityCheckerRef}> {/* Attach ref to ToxicityChecker */}
+            <ToxicityChecker/>
+          </div>
         </div>
       </section>
 
