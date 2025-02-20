@@ -216,11 +216,6 @@ body {
   transform: translateY(-1px);
 }
 
-.analyze-button:disabled {
-  background-color: var(--border-color);
-  cursor: not-allowed;
-}
-
 /* Progress bar */
 .progress-container {
   margin-top: 1rem;
@@ -265,18 +260,5 @@ body {
 
   .keymanweb-container {
     height: auto;
-  }
-}
-
-.loader {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }

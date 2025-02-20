@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ReactTransliterate } from 'react-transliterate';
-import { Mic, Loader } from 'lucide-react';
+import { Mic } from 'lucide-react';
 import 'react-transliterate/dist/index.css';
 import './checker.css';
 
@@ -10,7 +10,6 @@ const ToxicityChecker = () => {
   const [toxicityScore, setToxicityScore] = useState(null);
   const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const recognitionRef = useRef(null);
 
   // Language mapping for transliteration
@@ -74,18 +73,13 @@ const ToxicityChecker = () => {
       setError('Please enter some text to analyze.');
       return;
     }
-    setIsLoading(true);
     setError(null);
     try {
       // Simulate an API call
-      setTimeout(() => {
-        const mockResponse = { score: Math.floor(Math.random() * 100) };
-        setToxicityScore(mockResponse.score);
-        setIsLoading(false);
-      }, 1000);
+      const mockResponse = { score: Math.floor(Math.random() * 100) };
+      setToxicityScore(mockResponse.score);
     } catch (error) {
       setError('Failed to analyze toxicity. Please try again.');
-      setIsLoading(false);
     }
   };
 
@@ -134,8 +128,8 @@ const ToxicityChecker = () => {
               </div>
             </div>
 
-            <button onClick={analyzeToxicity} className="analyze-button" disabled={isLoading}>
-              {isLoading ? <Loader className="loader" size={20} /> : 'Analyze Toxicity'}
+            <button onClick={analyzeToxicity} className="analyze-button">
+              Analyze Toxicity
             </button>
 
             {toxicityScore !== null && (
