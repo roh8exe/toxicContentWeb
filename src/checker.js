@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ReactTransliterate } from 'react-transliterate';
-import { Mic } from 'lucide-react';
+import { Mic, Loader } from 'lucide-react';
 import 'react-transliterate/dist/index.css';
 import './checker.css';
 
@@ -10,12 +10,12 @@ const ToxicityChecker = () => {
   const [toxicityScore, setToxicityScore] = useState(null);
   const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const recognitionRef = useRef(null);
-  
 
   // Language mapping for transliteration
   const languages = [
-    { code: 'as', name: 'Assamese', transliterateCode: 'bn' },// Assamese uses Bengali script
+    { code: 'as', name: 'Assamese', transliterateCode: 'bn' },
     { code: 'bn', name: 'Bengali', transliterateCode: 'bn' },
     { code: 'en', name: 'English', transliterateCode: 'en' },
     { code: 'gu', name: 'Gujarati', transliterateCode: 'gu' },
@@ -71,14 +71,21 @@ const ToxicityChecker = () => {
 
   const analyzeToxicity = async () => {
     if (!text.trim()) {
-        setError('Please enter some text to analyze.');
-        return;
-      }
+      setError('Please enter some text to analyze.');
+      return;
+    }
+    setIsLoading(true);
+    setError(null);
     try {
-      const mockResponse = { score: Math.floor(Math.random() * 100) };
-      setToxicityScore(mockResponse.score);
+      // Simulate an API call
+      setTimeout(() => {
+        const mockResponse = { score: Math.floor(Math.random() * 100) };
+        setToxicityScore(mockResponse.score);
+        setIsLoading(false);
+      }, 1000);
     } catch (error) {
       setError('Failed to analyze toxicity. Please try again.');
+      setIsLoading(false);
     }
   };
 
@@ -86,13 +93,14 @@ const ToxicityChecker = () => {
     <div className="app-container">
       <nav className="nav-bar">
         <div className="nav-content">
+          {/* Add any navigation content here */}
         </div>
       </nav>
 
       <div className="main-content">
         <div className="card">
           <div className="card-header">
-            <h1 className="card-title" >Content Toxicity Analyzer</h1>
+            <h1 className="card-title">Content Toxicity Analyzer</h1>
           </div>
           <div className="card-content">
             {error && <div className="error-message">{error}</div>}
@@ -118,16 +126,16 @@ const ToxicityChecker = () => {
                   value={text}
                   onChangeText={setText}
                   lang={languages.find(l => l.code === selectedLanguage)?.transliterateCode || 'en'}
-                  containerClassName="custom-suggestion-box" 
+                  containerClassName="custom-suggestion-box"
                 />
                 <button className={`mic-button ${isListening ? 'listening' : ''}`} onClick={toggleListening}>
-                <Mic size={20} />
+                  <Mic size={20} />
                 </button>
               </div>
             </div>
 
-            <button onClick={analyzeToxicity} className="analyze-button">
-              Analyze Toxicity
+            <button onClick={analyzeToxicity} className="analyze-button" disabled={isLoading}>
+              {isLoading ? <Loader className="loader" size={20} /> : 'Analyze Toxicity'}
             </button>
 
             {toxicityScore !== null && (

@@ -49,27 +49,28 @@ body {
 
 .card {
   background-color: var(--card-background);
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
-  padding: 1.5rem;
+  padding: 2rem;
 }
-.card_title {
+
+.card-title {
   font-weight: bold;
-  color: var(--text-secondary); /* Light gray for card title */
+  color: var(--text-secondary);
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 1rem;
 }
 
 /* Form elements */
 .input-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .input-label {
   display: block;
   font-weight: 500;
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.5rem;
   color: var(--text-primary);
   font-size: 0.875rem;
 }
@@ -108,10 +109,11 @@ body {
   resize: vertical;
   overflow-y: auto;
 }
+
 .input-wrapper {
   position: relative;
   width: 100%;
-  max-width: 100%; /* Ensure it doesn't exceed the parent's width */
+  max-width: 100%;
 }
 
 .text-input:focus {
@@ -132,92 +134,29 @@ body {
 
 /* On-screen keyboard container (Keyman) */
 .custom-suggestion-box {
-  border: none !important; /* Remove border */
-  background-color: transparent !important; /* Remove background */
-  box-shadow: none !important;/* Match your theme's border color */
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
   max-width: 100%;
 }
 
-/* Override individual suggestion items */
 .custom-suggestion-box li {
-  background-color: var(--card-background) !important; /* Use your dark theme color */
-  color: var(--text-primary) !important; /* Ensure text is visible */
+  background-color: var(--card-background) !important;
+  color: var(--text-primary) !important;
 }
 
-/* Override active/focused suggestion items */
 .custom-suggestion-box li:hover,
 .custom-suggestion-box li:focus {
-  background-color: var(--primary-color) !important; /* Use your theme's primary color */
+  background-color: var(--primary-color) !important;
   color: white !important;
 }
+
 /* Prevent textarea from being blocked by keyboard */
 .text-input {
   padding-bottom: 100px;
 }
 
 /* Button styles */
-.mic-button,
-.keyboard-button {
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background-color: var(--card-background);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-}
-
-.mic-button:hover,
-.keyboard-button:hover {
-  background-color: var(--primary-light);
-  border-color: var(--primary-color);
-}
-
-.keyboard-button.active {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: white;
-}
-
-/* Analyze button */
-.analyze-button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.analyze-button:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-1px);
-}
-
-/* Responsive Design */
-@media (max-width: 640px) {
-  .main-content {
-    margin-top: 4rem;
-    padding: 0 0.75rem;
-  }
-
-  .input-wrapper {
-    flex-direction: column;
-  }
-  
-  .keymanweb-container {
-    height: auto;
-  }
-}
 .mic-button {
   position: absolute;
   right: 10px;
@@ -244,7 +183,7 @@ body {
 .mic-button.listening {
   background-color: var(--primary-color);
   color: white;
-  animation: pulse 1.5s infinite; /* Add a pulse animation when listening */
+  animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
@@ -256,5 +195,88 @@ body {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+.analyze-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.analyze-button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.analyze-button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+/* Progress bar */
+.progress-container {
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.results-container {
+  margin-top: 1.5rem;
+}
+
+.results-container h3 {
+  margin-bottom: 0.5rem;
+}
+
+.results-container p {
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .main-content {
+    margin-top: 4rem;
+    padding: 0 0.75rem;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+  }
+
+  .keymanweb-container {
+    height: auto;
+  }
+}
+
+.loader {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
