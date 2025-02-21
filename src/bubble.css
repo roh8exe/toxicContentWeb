@@ -1,0 +1,176 @@
+/* bubble.css */
+
+/* Container for the bubbles */
+.bubbles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure it stays behind content but is visible */
+    overflow: hidden;
+    pointer-events: none; /* Ensures clicks pass through to content */
+  }
+  
+  /* Bubble styling */
+  .bubble {
+    position: absolute; /* Position within the container */
+    background-color: rgba(0, 123, 255, 0.15); /* Brighter blue with higher opacity */
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  
+  /* Individual bubble positions, sizes and animations */
+  .bubble:nth-child(1) { 
+    width: 120px; 
+    height: 120px; 
+    top: 10%; 
+    left: 5%; 
+    animation: float 25s infinite linear; 
+  }
+  
+  .bubble:nth-child(2) { 
+    width: 180px; 
+    height: 180px; 
+    top: 20%; 
+    left: 80%; 
+    animation: float 18s infinite linear 2s; 
+  }
+  
+  .bubble:nth-child(3) { 
+    width: 80px; 
+    height: 80px; 
+    top: 40%; 
+    left: 20%; 
+    animation: float 20s infinite linear 1s; 
+  }
+  
+  .bubble:nth-child(4) { 
+    width: 140px; 
+    height: 140px; 
+    top: 70%; 
+    left: 65%; 
+    animation: float 22s infinite linear 3s; 
+  }
+  
+  .bubble:nth-child(5) { 
+    width: 60px; 
+    height: 60px; 
+    top: 60%; 
+    left: 35%; 
+    animation: float 15s infinite linear 2s; 
+  }
+  
+  .bubble:nth-child(6) { 
+    width: 90px; 
+    height: 90px; 
+    top: 80%; 
+    left: 50%; 
+    animation: float 19s infinite linear 1s; 
+  }
+  
+  .bubble:nth-child(7) { 
+    width: 110px; 
+    height: 110px; 
+    top: 30%; 
+    left: 90%; 
+    animation: float 21s infinite linear; 
+  }
+  
+  .bubble:nth-child(8) { 
+    width: 70px; 
+    height: 70px; 
+    top: 50%; 
+    left: 10%; 
+    animation: float 17s infinite linear 3s; 
+  }
+  
+  .bubble:nth-child(9) { 
+    width: 130px; 
+    height: 130px; 
+    top: 90%; 
+    left: 75%; 
+    animation: float 23s infinite linear 2s; 
+  }
+  
+  .bubble:nth-child(10) { 
+    width: 85px; 
+    height: 85px; 
+    top: 15%; 
+    left: 45%; 
+    animation: float 16s infinite linear 1s; 
+  }
+  
+  /* Animation for bubbles */
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translate(50px, -30px) rotate(90deg) scale(1.1);
+    }
+    50% {
+      transform: translate(100px, 0px) rotate(180deg) scale(1);
+    }
+    75% {
+      transform: translate(50px, 30px) rotate(270deg) scale(0.9);
+    }
+    100% {
+      transform: translate(0, 0) rotate(360deg) scale(1);
+    }
+  }
+  
+  /* Add some variety to bubble colors */
+  .bubble:nth-child(3n) {
+    background-color: rgba(102, 16, 242, 0.15); /* Purple tint */
+  }
+  
+  .bubble:nth-child(3n+1) {
+    background-color: rgba(0, 123, 255, 0.12); /* Lighter blue */
+  }
+  
+  .bubble:nth-child(3n+2) {
+    background-color: rgba(13, 110, 253, 0.08); /* Very light blue */
+  }
+  
+  /* Add subtle blur effect to some bubbles for depth */
+  .bubble:nth-child(even) {
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+  }
+  
+  /* Add subtle shadow to some bubbles */
+  .bubble:nth-child(4n) {
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  
+  /* Add subtle border to some bubbles */
+  .bubble:nth-child(5n) {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Media queries for better mobile display */
+  @media (max-width: 768px) {
+    .bubble {
+      /* Reduce animation distance on mobile */
+      animation-name: float-mobile;
+    }
+    
+    @keyframes float-mobile {
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+      25% {
+        transform: translate(20px, -15px) rotate(90deg) scale(1.1);
+      }
+      50% {
+        transform: translate(40px, 0px) rotate(180deg) scale(1);
+      }
+      75% {
+        transform: translate(20px, 15px) rotate(270deg) scale(0.9);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg) scale(1);
+      }
+    }
+  }

@@ -1,35 +1,103 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import './WorkProcess.css'; // Ensure you have a separate CSS file for styles
+import { MessageSquare, Activity, BarChart2 } from 'lucide-react';
+import './WorkProcess.css'; // Make sure to replace with the new CSS file
 
 const processSteps = [
-  { number: 1, title: "Input Text", description: "Enter or paste the content you want to analyze" },
-  { number: 2, title: "Analysis", description: "Our AI analyzes the content for toxic elements" },
-  { number: 3, title: "Results", description: "Get instant feedback on content toxicity" },
+  { 
+    number: 1, 
+    title: "Input Text", 
+    description: "Enter or paste the content you want to analyze for toxic elements", 
+    icon: <MessageSquare size={42} />
+  },
+  { 
+    number: 2, 
+    title: "Advanced Analysis", 
+    description: "Our AI instantly processes the content using state-of-the-art algorithms", 
+    icon: <Activity size={42} />
+  },
+  { 
+    number: 3, 
+    title: "Detailed Results", 
+    description: "Get comprehensive toxicity scores and actionable insights", 
+    icon: <BarChart2 size={42} />
+  },
 ];
+
+// Container animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3
+    }
+  }
+};
+
+// Item animation variants
+const itemVariants = {
+  hidden: { y: 50, opacity: 0 },
+  visible: { 
+    y: 0, 
+    opacity: 1,
+    transition: { 
+      type: "spring",
+      stiffness: 100,
+      damping: 12
+    }
+  }
+};
 
 export default function WorkProcess() {
   return (
     <section className="work-process-section">
-      <div className="section-container">
-        <h2 className="section-title">How It Works</h2>
-        <div className="process-grid">
+      <div className="section-container work-process-container">
+        <motion.h2 
+          className="section-title work-process-title"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          How It Works
+        </motion.h2>
+        
+        <motion.p
+          className="work-process-subtitle"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          Our toxicity checker uses advanced AI to analyze your content in just three simple steps
+        </motion.p>
+        
+        <motion.div 
+          className="process-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {processSteps.map((step, index) => (
             <motion.div
               key={index}
               className="process-step"
-              initial={{ opacity: 0, y: 20 }} // Start off-screen
-              whileInView={{ opacity: 1, y: 0 }} // Animate to visible
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 1.0, delay: index * 0.2 }} // Delay for sequential effect
-              viewport={{ once: false }} // Allow multiple triggers
+              variants={itemVariants}
+              whileHover={{ 
+                y: -15,
+                boxShadow: "0 20px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 123, 255, 0.1)",
+                transition: { duration: 0.3 }
+              }}
             >
               <div className="step-number">{step.number}</div>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
+              <div className="step-icon">{step.icon}</div>
+              <h3 className="step-title">{step.title}</h3>
+              <p className="step-description">{step.description}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

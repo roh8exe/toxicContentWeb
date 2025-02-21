@@ -1,163 +1,170 @@
-/* Font imports for different scripts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Gurmukhi:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
+/* Enhanced Toxicity Checker Styles - Updated to match website theme */
 
-/* Base styles */
+/* Base styles that match the website theme */
 :root {
-  --primary-color: #10b981;
-  --primary-dark: #059669;
-  --primary-light: #d1fae5;
-  --danger-color: #ef4444;
-  --success-color: #22c55e;
-  --warning-color: #f59e0b;
-  --background-color: #1a1a1a;
-  --card-background: #2d2d2d;
-  --text-primary: #ffffff;
-  --text-secondary: #d1d5db;
-  --border-color: #4b5563;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --primary-color: #4096ff; /* Lighter blue */
+  --primary-dark: #1677ff; /* Medium blue */
+  --primary-light: #e6f4ff; /* Very light blue */
+  --secondary-color: #7B5CFF; /* Softer purple for accents */
+  --background-color: #ffffff; /* White background */
+  --card-background: #f8f9fa; /* Light gray for cards */
+  --text-primary: #212529; /* Dark gray for primary text */
+  --text-secondary: #6c757d; /* Medium gray for secondary text */
+  --border-color: #dee2e6; /* Light gray for borders */
+  --transition-speed: 300ms;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: var(--background-color);
-  color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-.main-content {
+/* Card Container */
+.checker-container {
+  width: 100%;
   max-width: 800px;
-  margin: 4.5rem auto 2rem;
-  padding: 0 1rem;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.card {
-  background-color: var(--card-background);
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border-color);
-  padding: 2rem;
+.toxicity-card {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 5px 10px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(222, 226, 230, 0.4);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  backdrop-filter: blur(10px);
 }
 
-.card-title {
-  font-weight: bold;
-  color: var(--text-secondary);
+.toxicity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+/* Card Header */
+.toxicity-card-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid rgba(222, 226, 230, 0.3);
+  border-radius: 20px 20px 0 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.toxicity-card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 1;
+}
+
+.toxicity-card-title {
+  color: white;
+  font-size: 1.85rem;
+  font-weight: 700;
+  margin: 0;
   text-align: center;
-  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Form elements */
-.input-group {
+/* Card Content */
+.toxicity-card-content {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Error Message */
+.toxicity-error-message {
+  background-color: #ffe5e5;
+  color: #d32f2f;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.toxicity-error-message svg {
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Form Elements */
+.toxicity-input-group {
   margin-bottom: 1.5rem;
 }
 
-.input-label {
+.toxicity-input-label {
   display: block;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
   font-size: 0.875rem;
+  letter-spacing: 0.3px;
 }
 
-.language-select {
+.toxicity-language-select {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.875rem 1rem;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 0.875rem;
-  background-color: var(--card-background);
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  background-color: rgba(255, 255, 255, 0.9);
   color: var(--text-primary);
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all var(--transition-speed);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
-.language-select:focus {
+.toxicity-language-select:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px var(--primary-light);
 }
 
-/* Text input area with dynamic font changes */
-.text-input {
-  width: 100%;
-  min-height: 150px;
-  font-size: 1rem;
-  border-radius: 6px;
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  background-color: transparent;
-  color: var(--text-primary);
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
-  box-shadow: none;
-  resize: vertical;
-  overflow-y: auto;
-}
-
-.input-wrapper {
+.toxicity-input-wrapper {
   position: relative;
   width: 100%;
-  max-width: 100%;
 }
 
-.text-input:focus {
+.toxicity-text-input {
+  width: 100%;
+  min-height: 140px;
+  max-height: 300px;
+  font-size: 1rem;
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  transition: all var(--transition-speed);
   outline: none;
-  border: none;
-  box-shadow: 0 0 0 3px var(--primary-light);
+  resize: vertical;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+  font-family: inherit;
+  line-height: 1.6;
 }
 
-/* Script-specific font styles */
-.text-input.script-latin { font-family: 'Noto Sans', sans-serif; }
-.text-input.script-bengali { font-family: 'Noto Sans Bengali', sans-serif; }
-.text-input.script-devanagari { font-family: 'Noto Sans Devanagari', sans-serif; }
-.text-input.script-gujarati { font-family: 'Noto Sans Gujarati', sans-serif; }
-.text-input.script-gurmukhi { font-family: 'Noto Sans Gurmukhi', sans-serif; }
-.text-input.script-tamil { font-family: 'Noto Sans Tamil', sans-serif; }
-.text-input.script-telugu { font-family: 'Noto Sans Telugu', sans-serif; }
-.text-input.script-arabic { font-family: 'Noto Nastaliq Urdu', sans-serif; }
-
-/* On-screen keyboard container (Keyman) */
-.custom-suggestion-box {
-  border: none !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  max-width: 100%;
+.toxicity-text-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light), inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.custom-suggestion-box li {
-  background-color: var(--card-background) !important;
-  color: var(--text-primary) !important;
-}
-
-.custom-suggestion-box li:hover,
-.custom-suggestion-box li:focus {
-  background-color: var(--primary-color) !important;
-  color: white !important;
-}
-
-/* Prevent textarea from being blocked by keyboard */
-.text-input {
-  padding-bottom: 100px;
-}
-
-/* Button styles */
-.mic-button {
+/* Microphone Button */
+.toxicity-mic-button {
   position: absolute;
   right: 10px;
   bottom: 10px;
@@ -165,101 +172,316 @@ body {
   height: 40px;
   border: 1px solid var(--border-color);
   border-radius: 50%;
-  background-color: var(--card-background);
+  background-color: var(--background-color);
   color: var(--text-primary);
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.mic-button:hover {
+.toxicity-mic-button:hover {
   background-color: var(--primary-light);
   border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
-.mic-button.listening {
+.toxicity-mic-button.listening {
   background-color: var(--primary-color);
   color: white;
   animation: pulse 1.5s infinite;
+  box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.2);
 }
 
 @keyframes pulse {
   0% {
     transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
   }
-  50% {
+  70% {
     transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
   }
   100% {
     transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
   }
 }
 
-.analyze-button {
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Analyze Button */
+.toxicity-analyze-button {
   width: 100%;
-  padding: 0.75rem;
-  background-color: var(--primary-color);
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 12px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.analyze-button:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-1px);
-}
-
-/* Progress bar */
-.progress-container {
-  margin-top: 1rem;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background-color: var(--border-color);
-  border-radius: 5px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
   overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(64, 150, 255, 0.25);
+  letter-spacing: 0.3px;
 }
 
-.progress-fill {
+.toxicity-analyze-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  transition: width 0.3s ease;
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
 }
 
-.results-container {
-  margin-top: 1.5rem;
+.toxicity-analyze-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(64, 150, 255, 0.3);
 }
 
-.results-container h3 {
-  margin-bottom: 0.5rem;
+.toxicity-analyze-button:hover::before {
+  opacity: 1;
 }
 
-.results-container p {
-  margin-top: 0.5rem;
+.toxicity-analyze-button::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  border-radius: 12px 12px 60px 60px / 12px 12px 30px 30px;
+  pointer-events: none;
+}
+
+.toxicity-analyze-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Results Container */
+.toxicity-results-container {
+  margin-top: 2.5rem;
+  padding: 1.75rem;
+  background-color: white;
+  border-radius: 16px;
+  border: 1px solid rgba(222, 226, 230, 0.5);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+  animation: slideUp 0.4s ease-out;
+  backdrop-filter: blur(10px);
+}
+
+.toxicity-results-container h3 {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toxicity-results-container h3 svg {
+  color: var(--primary-color);
+}
+
+.toxicity-progress-container {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toxicity-progress-bar {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #f0f2f5;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.toxicity-progress-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background-size: 30px 30px;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+  from { background-position: 0 0; }
+  to { background-position: 30px 0; }
+}
+
+.toxicity-score-value {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  min-width: 3.5rem;
+  text-align: right;
+}
+
+.toxicity-result-message {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
   font-weight: 500;
+  font-size: 0.9375rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Responsive Design */
-@media (max-width: 640px) {
-  .main-content {
-    margin-top: 4rem;
-    padding: 0 0.75rem;
-  }
+.toxicity-result-message-low {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+}
 
-  .input-wrapper {
+.toxicity-result-message-moderate {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.toxicity-result-message-high {
+  background-color: #ffebee;
+  color: #b71c1c;
+}
+
+.toxicity-score-badge {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  margin-left: auto;
+}
+
+.toxicity-score-badge-low {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+.toxicity-score-badge-moderate {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+.toxicity-score-badge-high {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom suggestion box for transliteration */
+.toxicity-custom-suggestion-box {
+  width: 100%;
+}
+
+.toxicity-custom-suggestion-box ul {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+}
+
+.toxicity-custom-suggestion-box li {
+  padding: 8px 12px !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: all 0.2s !important;
+}
+
+.toxicity-custom-suggestion-box li:last-child {
+  border-bottom: none !important;
+}
+
+.toxicity-custom-suggestion-box li:hover,
+.toxicity-custom-suggestion-box li:focus {
+  background-color: var(--primary-light) !important;
+  color: var(--primary-dark) !important;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .toxicity-card-header {
+    padding: 1rem 1.25rem;
+  }
+  
+  .toxicity-card-title {
+    font-size: 1.5rem;
+  }
+  
+  .toxicity-card-content {
+    padding: 1.25rem;
+  }
+  
+  .toxicity-results-container {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toxicity-card-content {
+    padding: 1rem;
+  }
+  
+  .toxicity-results-container {
+    padding: 1rem;
+  }
+  
+  .toxicity-progress-container {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
-
-  .keymanweb-container {
-    height: auto;
+  
+  .toxicity-score-value {
+    text-align: left;
   }
-
 }

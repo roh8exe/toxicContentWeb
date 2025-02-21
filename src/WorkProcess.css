@@ -1,71 +1,212 @@
-/* Work Process Section Styles */
+/* Enhanced Work Process Section Styles */
 .work-process-section {
-  padding: 5rem 0;
-  background: var(--background-gradient-start);
+  padding: 6rem 0;
+  background: linear-gradient(to bottom, var(--background-gradient-start), var(--background-gradient-end));
+  position: relative;
+  overflow: hidden;
 }
 
+/* Background decorative elements */
+.work-process-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-image: radial-gradient(circle, rgba(100, 149, 237, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.work-process-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section title with enhanced styling */
+.work-process-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.work-process-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 4px;
+  width: 60px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
+}
+
+.work-process-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  max-width: 700px;
+  margin: 1.5rem auto 3.5rem;
+}
+
+/* Process steps layout with connecting lines */
 .process-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  position: relative;
   margin-top: 3rem;
 }
 
+/* Connecting line between process steps */
+.process-grid::before {
+  content: '';
+  position: absolute;
+  top: 3.5rem;
+  left: 17%;
+  right: 17%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    var(--primary-light) 5%, 
+    var(--primary-color) 50%, 
+    var(--primary-light) 95%,
+    transparent 100%);
+  z-index: 0;
+}
+
+/* Individual process step cards */
 .process-step {
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
   text-align: center;
-  padding: 2rem;
-  background: #2d2d2d; /* Dark background */
+  padding: 2.5rem 2rem;
+  background: #ffffff;
   color: var(--text-primary);
-  border-radius: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-  transition: transform 0.1s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
-  opacity: 1; /* Start visible */
-  transform: translateY(0); /* Start at normal position */
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 8px rgba(0, 0, 0, 0.03);
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid rgba(230, 230, 230, 0.7);
+  backdrop-filter: blur(10px);
 }
 
-/* Enhanced Hover Effect */
+/* Enhanced hover effect */
 .process-step:hover {
-  transform: translateY(-10px) scale(1.05); /* Pop-up effect with scaling */
-  background-color: var(--primary-color); /* Change background color to primary green */
-  color: white; /* Change text color to white for contrast */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-  cursor: pointer; /* Indicate interactivity */
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 123, 255, 0.1);
+  border-color: rgba(0, 123, 255, 0.15);
 }
 
+/* Step number styling */
 .step-number {
-  width: 4rem;
-  height: 4rem;
-  margin: 0 auto 1.5rem;
-  background: var(--primary-light);
+  width: 7rem;
+  height: 7rem;
+  margin: -4.5rem auto 2rem;
+  background: #ffffff;
   color: var(--primary-color);
+  border: 3px solid var(--primary-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for step number */
+  font-size: 2.25rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.15);
+  transition: all 0.3s ease;
 }
 
 .process-step:hover .step-number {
-  background-color: white; /* Change step number background on hover */
-  color: var(--primary-color); /* Change step number text color on hover */
+  color: white;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-h3 {
-  margin: 1rem 0; /* Add some margin for spacing */
-  transition: color 0.3s ease; /* Smooth transition for title */
+/* Step title styling */
+.step-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1.25rem 0 1rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
-.process-step:hover h3 {
-  color: white; /* Change title color on hover */
+.process-step:hover .step-title {
+  color: var(--primary-color);
 }
 
-p {
-  margin: 0; /* Reset margin for paragraphs */
-  transition: color 0.3s ease; /* Smooth transition for description */
+/* Step description styling */
+.step-description {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+  transition: color 0.3s ease;
 }
 
-.process-step:hover p {
-  color: white; /* Change description color on hover */
+/* Process step icon container */
+.step-icon {
+  height: 3.5rem;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.process-step:hover .step-icon {
+  transform: scale(1.15);
+  color: var(--primary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .process-grid::before {
+    display: none; /* Hide connecting line on smaller screens */
+  }
+  
+  .process-step {
+    margin-top: 4rem;
+  }
+  
+  .work-process-section {
+    padding: 5rem 0 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .process-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+  }
+  
+  .process-step {
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .work-process-title {
+    font-size: 2.25rem;
+  }
+  
+  .work-process-subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
 }
