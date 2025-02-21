@@ -1,6 +1,6 @@
 // App.js
 import React, { useState, useRef } from 'react';
-import { ChevronDown, Users } from 'lucide-react';
+import { ChevronDown, ExternalLink, Users } from 'lucide-react';
 import { Twitter, Linkedin, Github, Youtube } from 'lucide-react';
 import 'react-transliterate/dist/index.css';
 import ToxicityChecker from './checker.js';
@@ -261,6 +261,9 @@ const WebsiteWithToxicityChecker = () => {
                 </a>
                 <a href="https://www.youtube.com/@LingoResearchGroupIITGN" className="social-link youtube" target="_blank" rel="noopener noreferrer">
                   <Youtube />
+                </a>
+                <a href="https://lingo.iitgn.ac.in/" className="social-link ExternalLink" target="_blank" rel="noopener noreferrer">
+                  <ExternalLink />
                 </a>
               </div>
             </div>
