@@ -17,7 +17,7 @@ import 'react-transliterate/dist/index.css';
 import './checker.css';  // Keep your original CSS for compatibility
 
 const ToxicityChecker = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [selectedLanguage, setSelectedLanguage] = useState('hi');
   const [text, setText] = useState('');
   const [toxicityScore, setToxicityScore] = useState(null);
   const [isListening, setIsListening] = useState(false);
