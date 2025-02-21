@@ -109,7 +109,7 @@ const WebsiteWithToxicityChecker = () => {
       <nav className="nav-bar enhanced-nav">
         <div className="nav-container">
           <div className="brand">
-            <span className="app-title animate-glow">ToxiGuard</span>
+            <span className="app-title animate-glow">UnityAI-Guard</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -214,7 +214,7 @@ const WebsiteWithToxicityChecker = () => {
       {/* Contact Section */}
       <section ref={contactRef} className="section enhanced-contact-section animate-on-scroll" id="contact-section">
         <div className="section-container">
-          <h2 className="section-title">Contact Us</h2>
+          <h2 className="section-title">Feedback Form</h2>
           <form className="contact-form enhanced-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label className="form-label">Name</label>
@@ -237,11 +237,11 @@ const WebsiteWithToxicityChecker = () => {
         <div className="section-container">
           <div className="profile-content text-center max-w-3xl mx-auto">
             {/* Profile Name */}
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Prof. Mayank Singh</h2>
+            {/* <h2 className="text-3xl font-bold text-gray-900 mb-4">Prof. Mayank Singh</h2> */}
             
             {/* Address */}
             <div className="address-info text-gray-600 mb-8 space-y-2">
-              <p>AB 13/402 B,</p>
+              
               <p>Indian Institute of Technology Gandhinagar</p>
               <p>Palaj, Gandhinagar – 382355, Gujarat</p>
             </div>

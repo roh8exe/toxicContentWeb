@@ -29,7 +29,7 @@ const ToxicityChecker = () => {
   const languages = [
     //{ code: 'as', name: 'Assamese', transliterateCode: 'bn' },
     //{ code: 'bn', name: 'Bengali', transliterateCode: 'bn' },
-    { code: 'en', name: 'English', transliterateCode: 'en' },
+    // { code: 'en', name: 'English', transliterateCode: 'en' },
    // { code: 'gu', name: 'Gujarati', transliterateCode: 'gu' },
     { code: 'hi', name: 'Hindi', transliterateCode: 'hi' },
    //{ code: 'kn', name: 'Kannada', transliterateCode: 'kn' },
