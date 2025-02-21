@@ -97,12 +97,11 @@ const ToxicityChecker = () => {
     setIsAnalyzing(true);
   
     try {
-      const response = await fetch("http://10.0.62.187:2026/predict", {
+      const response = await fetch("http://10.196.35.8:2026/predict", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
       });
-  
       if (!response.ok) {
         throw new Error("Failed to fetch toxicity analysis.");
       }
