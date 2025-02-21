@@ -262,7 +262,7 @@ const WebsiteWithToxicityChecker = () => {
                 <a href="https://www.youtube.com/@LingoResearchGroupIITGN" className="social-link youtube" target="_blank" rel="noopener noreferrer">
                   <Youtube />
                 </a>
-                <a href="https://yourwebsite.com" className="social-link website" target="_blank" rel="noopener noreferrer">
+                <a href="https://lingo.iitgn.ac.in/" className="social-link website" target="_blank" rel="noopener noreferrer">
                   <Globe />
                 </a>
               </div>
