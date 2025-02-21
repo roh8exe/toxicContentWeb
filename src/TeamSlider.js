@@ -3,6 +3,10 @@ import { Linkedin, Github, Mail } from 'lucide-react';
 import './TeamSection.css';
 import img1 from './photos/mayank.png'
 import img2 from './photos/Himanshu.png'
+import img3 from './photos/DakshJain.png'
+import img4 from './photos/ReddybathuniVenkat.png'
+import img5 from './photos/rohit.png'
+import img6 from './photos/EshwarDhande.png'
 
 // Team members data - replace with your actual team info
 const teamData = {
@@ -15,7 +19,7 @@ const teamData = {
     socialLinks: {
       linkedin: "https://www.linkedin.com/in/mayank-singh-b591a818/",
       github: "https://github.com/mayank4490",
-      email: "mailto:mayank.singh@iitgn.ac.in"
+      email: "mailto:singh.mayank@iitgn.ac.in"
     }
   },
   members: [
@@ -24,55 +28,55 @@ const teamData = {
       name: "Himanshu Beniwal",
       role: "Research Scientist",
       image: img2, // Empty to use placeholder
-      bio: "PhD in Computer Science with expertise in NLP and content moderation.",
+      bio: "PhD in Computer Science with expertise in NLP",
       socialLinks: {
-        linkedin: "https://linkedin.com/in/janesmith",
-        github: "https://github.com/janesmith",
-        email: "mailto:jane.smith@example.com"
+        linkedin: "https://www.linkedin.com/in/himanshubeniwal/",
+        github: "https://github.com/himanshubeniwal",
+        email: "mailto:himanshubeniwal@iitgn.ac.in"
       }
     },
     {
       id: 3,
-      name: "Michael Chen",
+      name: "Daksh Jain",
       role: "ML Engineer",
-      image: "",
-      bio: "Specializes in machine learning models for toxicity detection.",
+      image: img3,
+      bio: "",
       socialLinks: {
-        linkedin: "https://linkedin.com/in/michaelchen",
-        github: "https://github.com/michaelchen",
-        email: "mailto:michael.chen@example.com"
+        linkedin: "https://www.linkedin.com/in/dkshjn/",
+        github: "https://dkshjn.github.io/portfolio/#header",
+        email: "mailto:daksh.jain@iitgn.ac.in"
       }
     },
     {
       id: 4,
-      name: "Priya Patel",
-      role: "Data Scientist",
-      image: "",
-      bio: "Expert in dataset curation and model evaluation for ethical AI systems.",
+      name: "Venkat Reddybathuni",
+      role: "ML Engineer",
+      image: img4,
+      bio: "",
       socialLinks: {
-        linkedin: "https://linkedin.com/in/priyapatel",
+        linkedin: "https://www.linkedin.com/in/reddybathuni-venkat-158364261/?originalSubdomain=in",
         github: "https://github.com/priyapatel",
-        email: "mailto:priya.patel@example.com"
+        email: "mailto:reddybathuni.venkat@iitgn.ac.in"
       }
     },
     {
       id: 5,
-      name: "Ahmed Hassan",
+      name: "Rohit Kumar",
       role: "Full Stack Developer",
-      image: "",
-      bio: "Builds robust APIs and interfaces for toxicity detection tools.",
+      image: img5,
+      bio: "",
       socialLinks: {
-        linkedin: "https://linkedin.com/in/ahmedhassan",
-        github: "https://github.com/ahmedhassan",
-        email: "mailto:ahmed.hassan@example.com"
+        linkedin: "https://www.linkedin.com/in/rohit-bansal-/",
+        github: "https://github.com/roh8exe",
+        email: "mailto:rohit.kumar.23063@iitgoa.ac.in"
       }
     },
     {
       id: 6,
-      name: "Sarah Johnson",
-      role: "UX Designer",
-      image: "",
-      bio: "Creates intuitive user experiences for content moderation interfaces.",
+      name: "Eshwar Dhande",
+      role: "ML Engineer",
+      image: img6,
+      bio: "",
       socialLinks: {
         linkedin: "https://linkedin.com/in/sarahjohnson",
         github: "https://github.com/sarahjohnson",
