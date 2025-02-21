@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import 'react-transliterate/dist/index.css';
 import './checker.css';  // Keep your original CSS for compatibility
-import './checker.css';  // Add the new enhanced styles
 
 const ToxicityChecker = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -93,27 +92,31 @@ const ToxicityChecker = () => {
       setError('Please enter some text to analyze.');
       return;
     }
-    
+  
     setError(null);
     setIsAnalyzing(true);
-    
+  
     try {
-      // Simulate an API call with a short delay for better UX
-      await new Promise(resolve => setTimeout(resolve, 1200));
-      
-      // Simulate analysis result
-      // In a real implementation, this would be a call to your backend
-      const mockResponse = { 
-        score: Math.floor(Math.random() * 100) 
-      };
-      
-      setToxicityScore(mockResponse.score);
+      const response = await fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch toxicity analysis.");
+      }
+  
+      const data = await response.json();
+      setToxicityScore(data.toxicity);
     } catch (error) {
-      setError('Failed to analyze toxicity. Please try again.');
+      setError("Failed to analyze toxicity. Please try again.");
     } finally {
       setIsAnalyzing(false);
     }
   };
+  
+     
 
   // Function to get the appropriate score message and class
   const getScoreInfo = (score) => {
