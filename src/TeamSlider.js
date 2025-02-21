@@ -7,6 +7,7 @@ import img3 from './photos/DakshJain.png'
 import img4 from './photos/ReddybathuniVenkat.png'
 import img5 from './photos/rohit.png'
 import img6 from './photos/EshwarDhande.png'
+import img7 from './photos/Pavandeekshith Doddi.png'
 
 // Team members data - replace with your actual team info
 const teamData = {
@@ -78,17 +79,17 @@ const teamData = {
       image: img6,
       bio: "",
       socialLinks: {
-        linkedin: "https://linkedin.com/in/sarahjohnson",
+        linkedin: "https://www.linkedin.com/in/eshwar-dhande/",
         github: "https://github.com/sarahjohnson",
-        email: "mailto:sarah.johnson@example.com"
+        email: "mailto:eshwar.dhande@iitgn.ac.in"
       }
     },
     {
       id: 7,
-      name: "Carlos Rodriguez",
-      role: "NLP Specialist",
-      image: "",
-      bio: "Develops multilingual NLP models for toxicity detection.",
+      name: "Pavan Deekshith",
+      role: "Ml Engineer",
+      image: img7,
+      bio: "",
       socialLinks: {
         linkedin: "https://linkedin.com/in/carlosrodriguez",
         github: "https://github.com/carlosrodriguez",
@@ -97,14 +98,14 @@ const teamData = {
     },
     {
       id: 8,
-      name: "Lisa Wong",
+      name: "Birudugadda Srivibhav",
       role: "Project Manager",
       image: "",
-      bio: "Coordinates research and development efforts across the platform.",
+      bio: "",
       socialLinks: {
         linkedin: "https://linkedin.com/in/lisawong",
         github: "https://github.com/lisawong",
-        email: "mailto:lisa.wong@example.com"
+        email: "mailto:birudugadda.srivibhav@iitgn.ac.in"
       }
     }
   ]
