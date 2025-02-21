@@ -28,7 +28,7 @@ class ToxicityClassifier(torch.nn.Module):
 
 # Load Model
 class ModelTester:
-    def __init__(self, model_dir="models"):
+    def __init__(self, model_dir="LingoIITGN/mBERT_toxic_hindi"):
         self.model_dir = Path(model_dir)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.load_models()
