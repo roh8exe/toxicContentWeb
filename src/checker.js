@@ -14,7 +14,7 @@ import {
   Activity
 } from 'lucide-react';
 import 'react-transliterate/dist/index.css';
-import './checker.css';  // Keep your original CSS for compatibility
+import './checker.css';
 
 const ToxicityChecker = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('hi');
@@ -25,25 +25,11 @@ const ToxicityChecker = () => {
   const [error, setError] = useState(null);
   const recognitionRef = useRef(null);
 
-  // Language mapping for transliteration
   const languages = [
-    //{ code: 'as', name: 'Assamese', transliterateCode: 'bn' },
-    //{ code: 'bn', name: 'Bengali', transliterateCode: 'bn' },
-    // { code: 'en', name: 'English', transliterateCode: 'en' },
-   // { code: 'gu', name: 'Gujarati', transliterateCode: 'gu' },
     { code: 'hi', name: 'Hindi', transliterateCode: 'hi' },
-   //{ code: 'kn', name: 'Kannada', transliterateCode: 'kn' },
-    //{ code: 'ml', name: 'Malayalam', transliterateCode: 'ml' },
-    //{ code: 'mr', name: 'Marathi', transliterateCode: 'mr' },
-    //{ code: 'or', name: 'Odia', transliterateCode: 'or' },
-   // { code: 'pa', name: 'Punjabi', transliterateCode: 'pa' },
-   // { code: 'sa', name: 'Sanskrit', transliterateCode: 'sa' },
-   // { code: 'ta', name: 'Tamil', transliterateCode: 'ta' },
-    { code: 'te', name: 'Telugu', transliterateCode: 'te' },
-    //{ code: 'ur', name: 'Urdu', transliterateCode: 'ur' }
+    { code: 'te', name: 'Telugu', transliterateCode: 'te' }
   ];
 
-  // Speech recognition setup
   useEffect(() => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -61,7 +47,7 @@ const ToxicityChecker = () => {
         setText(transcript);
       };
 
-      recognitionRef.current.onerror = (event) => {
+      recognitionRef.current.onerror = () => {
         setError('Speech recognition failed. Please try again.');
         setIsListening(false);
       };
@@ -80,9 +66,9 @@ const ToxicityChecker = () => {
     if (isListening) {
       recognitionRef.current.stop();
     } else {
-      setError(null); // Clear any previous errors
+      setError(null);
       const selectedLang = languages.find(lang => lang.code === selectedLanguage);
-      recognitionRef.current.lang = selectedLang?.code || 'en';
+      recognitionRef.current.lang = selectedLang?.code || 'hi';  // Ensure correct language for speech recognition
       recognitionRef.current.start();
     }
   };
@@ -97,52 +83,32 @@ const ToxicityChecker = () => {
     setIsAnalyzing(true);
   
     try {
-      const response = await fetch("http://10.0.62.187:2026/predict", { 
+      const response = await fetch("http://127.0.0.1:2026/predict", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, lang: selectedLanguage }),  // Ensure lang is sent
       });
-      if (!response.ok) {
-        throw new Error("Failed to fetch toxicity analysis.");
+
+      const data = await response.json();
+      if (!response.ok || data.error) {
+        throw new Error(data.error || "Failed to fetch toxicity analysis.");
       }
   
-      const data = await response.json();
       setToxicityScore(data.toxicity);
     } catch (error) {
-      setError("Failed to analyze toxicity. Please try again.");
+      setError(error.message);
     } finally {
       setIsAnalyzing(false);
     }
   };
-  
-     
 
-  // Function to get the appropriate score message and class
   const getScoreInfo = (score) => {
     if (score < 30) {
-      return {
-        message: 'Low toxicity detected',
-        description: 'The content appears to be safe and appropriate.',
-        className: 'toxicity-result-message-low',
-        badgeClass: 'toxicity-score-badge-low',
-        icon: <CheckCircle size={18} />
-      };
+      return { message: 'Low toxicity detected', className: 'low', icon: <CheckCircle size={18} /> };
     } else if (score < 70) {
-      return {
-        message: 'Moderate toxicity detected',
-        description: 'The content contains some potentially inappropriate elements.',
-        className: 'toxicity-result-message-moderate',
-        badgeClass: 'toxicity-score-badge-moderate',
-        icon: <AlertCircle size={18} />
-      };
+      return { message: 'Moderate toxicity detected', className: 'moderate', icon: <AlertCircle size={18} /> };
     } else {
-      return {
-        message: 'High toxicity detected',
-        description: 'The content contains highly inappropriate or harmful elements.',
-        className: 'toxicity-result-message-high',
-        badgeClass: 'toxicity-score-badge-high',
-        icon: <XCircle size={18} />
-      };
+      return { message: 'High toxicity detected', className: 'high', icon: <XCircle size={18} /> };
     }
   };
 
@@ -150,7 +116,7 @@ const ToxicityChecker = () => {
     <div className="toxicity-card">
       <div className="toxicity-card-header">
         <h1 className="toxicity-card-title">
-          <Shield size={24} style={{ marginRight: '10px', verticalAlign: 'middle' }} />
+          <Shield size={24} style={{ marginRight: '10px' }} />
           Content Toxicity Analyzer
         </h1>
       </div>
@@ -165,7 +131,7 @@ const ToxicityChecker = () => {
 
         <div className="toxicity-input-group">
           <label className="toxicity-input-label">
-            <Globe size={16} style={{ marginRight: '8px', verticalAlign: 'text-bottom' }} />
+            <Globe size={16} style={{ marginRight: '8px' }} />
             Select Language
           </label>
           <select
@@ -181,7 +147,7 @@ const ToxicityChecker = () => {
 
         <div className="toxicity-input-group">
           <label className="toxicity-input-label">
-            <FileText size={16} style={{ marginRight: '8px', verticalAlign: 'text-bottom' }} />
+            <FileText size={16} style={{ marginRight: '8px' }} />
             Enter Text to Analyze
           </label>
           <div className="toxicity-input-wrapper">
@@ -195,13 +161,10 @@ const ToxicityChecker = () => {
               value={text}
               onChangeText={setText}
               lang={languages.find(l => l.code === selectedLanguage)?.transliterateCode || 'en'}
-              containerClassName="toxicity-custom-suggestion-box"
             />
             <button 
               className={`toxicity-mic-button ${isListening ? 'listening' : ''}`} 
               onClick={toggleListening}
-              aria-label={isListening ? "Stop listening" : "Start listening"}
-              title={isListening ? "Stop listening" : "Start listening"}
             >
               <Mic size={20} />
             </button>
@@ -216,7 +179,7 @@ const ToxicityChecker = () => {
           {isAnalyzing ? (
             <>
               <Activity size={18} />
-              Analyzing<span className="loading-dots">...</span>
+              Analyzing...
             </>
           ) : (
             <>
@@ -238,10 +201,7 @@ const ToxicityChecker = () => {
               <div className="toxicity-progress-bar">
                 <div 
                   className="toxicity-progress-fill" 
-                  style={{ 
-                    width: `${toxicityScore}%`, 
-                    backgroundColor: `hsl(${120 - toxicityScore * 1.2}, 70%, 50%)` 
-                  }} 
+                  style={{ width: `${toxicityScore}%`, backgroundColor: `hsl(${120 - toxicityScore * 1.2}, 70%, 50%)` }} 
                 />
               </div>
               <span className="toxicity-score-value">{toxicityScore}%</span>
@@ -254,9 +214,8 @@ const ToxicityChecker = () => {
                   {scoreInfo.icon}
                   <div>
                     <strong>{scoreInfo.message}</strong>
-                    <div>{scoreInfo.description}</div>
                   </div>
-                  <span className={`toxicity-score-badge ${scoreInfo.badgeClass}`}>
+                  <span className={`toxicity-score-badge ${scoreInfo.className}`}>
                     {toxicityScore}%
                   </span>
                 </div>
