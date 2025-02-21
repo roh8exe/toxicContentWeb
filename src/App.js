@@ -150,11 +150,11 @@ const WebsiteWithToxicityChecker = () => {
       {/* Text container on the left */}
       <div className="hero-text-container">
         <h1 className="hero-title gradient-text animate-on-scroll" id="hero-title">
-          Detect Toxic Content <span>Instantly</span>
+          Detect Toxic Content <span>Instantly!</span>
         </h1>
         <p className="hero-subtitle animate-on-scroll" id="hero-subtitle">
         <span className="hero-subtitle-animated">
-        Analyze and identify toxic content across multiple languages
+        Analyze and identify toxic content across multiple Indian languages. 
         </span>
         </p>
         <ChevronDown 
