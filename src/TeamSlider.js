@@ -8,6 +8,7 @@ import img4 from './photos/ReddybathuniVenkat.png'
 import img5 from './photos/rohit.png'
 import img6 from './photos/EshwarDhande.png'
 import img7 from './photos/Pavandeekshith Doddi.png'
+import img8 from './photos/BirudugaddaSrivibhav.png'
 
 // Team members data - replace with your actual team info
 const teamData = {
@@ -27,7 +28,7 @@ const teamData = {
     {
       id: 2,
       name: "Himanshu Beniwal",
-      role: "Research Scientist",
+      role: "Student",
       image: img2, // Empty to use placeholder
       bio: "PhD in Computer Science with expertise in NLP",
       socialLinks: {
@@ -39,7 +40,7 @@ const teamData = {
     {
       id: 3,
       name: "Daksh Jain",
-      role: "ML Engineer",
+      role: "Student",
       image: img3,
       bio: "",
       socialLinks: {
@@ -51,7 +52,7 @@ const teamData = {
     {
       id: 4,
       name: "Venkat Reddybathuni",
-      role: "ML Engineer",
+      role: "Student",
       image: img4,
       bio: "",
       socialLinks: {
@@ -63,7 +64,7 @@ const teamData = {
     {
       id: 5,
       name: "Rohit Kumar",
-      role: "Full Stack Developer",
+      role: "Student",
       image: img5,
       bio: "",
       socialLinks: {
@@ -75,7 +76,7 @@ const teamData = {
     {
       id: 6,
       name: "Eshwar Dhande",
-      role: "ML Engineer",
+      role: "Student",
       image: img6,
       bio: "",
       socialLinks: {
@@ -87,11 +88,11 @@ const teamData = {
     {
       id: 7,
       name: "Pavan Deekshith",
-      role: "Ml Engineer",
+      role: "Student",
       image: img7,
       bio: "",
       socialLinks: {
-        linkedin: "https://linkedin.com/in/carlosrodriguez",
+        linkedin: "https://www.linkedin.com/in/pavan-deekshith-doddi-40153a2a3/",
         github: "https://github.com/carlosrodriguez",
         email: "mailto:carlos.rodriguez@example.com"
       }
@@ -99,11 +100,11 @@ const teamData = {
     {
       id: 8,
       name: "Birudugadda Srivibhav",
-      role: "Project Manager",
-      image: "",
+      role: "Student",
+      image: img8,
       bio: "",
       socialLinks: {
-        linkedin: "https://linkedin.com/in/lisawong",
+        linkedin: "https://www.linkedin.com/in/birudugadda-srivibhav/",
         github: "https://github.com/lisawong",
         email: "mailto:birudugadda.srivibhav@iitgn.ac.in"
       }
