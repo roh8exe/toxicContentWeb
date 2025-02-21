@@ -1,7 +1,7 @@
 import React from 'react';
 import { Linkedin, Github, Mail } from 'lucide-react';
 import './TeamSection.css';
-import img1 from './photos/mayanksingh.png'
+import img1 from './photos/mayank.png'
 import img2 from './photos/Himanshu.png'
 
 // Team members data - replace with your actual team info
@@ -13,8 +13,8 @@ const teamData = {
     image: img1, // Leave this empty to force the placeholder image to load
     bio: "Professor at IIT Gandhinagar leading research on toxicity detection and content moderation systems, with expertise in NLP and ethical AI.",
     socialLinks: {
-      linkedin: "https://www.linkedin.com/in/mayank-singh/",
-      github: "https://github.com/mayanksingh",
+      linkedin: "https://www.linkedin.com/in/mayank-singh-b591a818/",
+      github: "https://github.com/mayank4490",
       email: "mailto:mayank.singh@iitgn.ac.in"
     }
   },
