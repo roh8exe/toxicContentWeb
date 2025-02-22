@@ -81,7 +81,7 @@ const teamData = {
       bio: "",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/eshwar-dhande/",
-        github: "https://github.com/sarahjohnson",
+        github: "",
         email: "mailto:eshwar.dhande@iitgn.ac.in"
       }
     },
@@ -93,8 +93,8 @@ const teamData = {
       bio: "",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/pavan-deekshith-doddi-40153a2a3/",
-        github: "https://github.com/carlosrodriguez",
-        email: "mailto:carlos.rodriguez@example.com"
+        github: "https://github.com/pavandeekshith",
+        email: "mailto:pavan.doddi@iitgn.ac.in"
       }
     },
     {
@@ -105,7 +105,7 @@ const teamData = {
       bio: "",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/birudugadda-srivibhav/",
-        github: "https://github.com/lisawong",
+        github: "https://github.com/Sparky1743",
         email: "mailto:birudugadda.srivibhav@iitgn.ac.in"
       }
     }
