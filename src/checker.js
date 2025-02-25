@@ -13,7 +13,6 @@ import {
   FileText,
   Activity
 } from 'lucide-react';
-import 'react-transliterate/dist/index.css';
 import './checker.css';
 
 const ToxicityChecker = () => {
