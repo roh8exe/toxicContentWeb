@@ -26,7 +26,8 @@ const ToxicityChecker = () => {
 
   const languages = [
     { code: 'hi', name: 'Hindi', transliterateCode: 'hi' },
-    { code: 'te', name: 'Telugu', transliterateCode: 'te' }
+    { code: 'te', name: 'Telugu', transliterateCode: 'te' },
+    { code: 'pa', name: 'Punjabi', transliterateCode:'pa'}
   ];
 
   useEffect(() => {
