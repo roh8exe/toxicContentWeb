@@ -506,3 +506,315 @@
     text-align: left;
   }
 }
+
+/* Feedback Prompt Section */
+.toxicity-feedback-prompt {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.toxicity-feedback-prompt p {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.toxicity-feedback-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.toxicity-feedback-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid var(--border-color);
+  background-color: white;
+  color: var(--text-primary);
+}
+
+.toxicity-feedback-button:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.toxicity-feedback-button:active {
+  transform: translateY(0);
+}
+
+/* Feedback Form Styles */
+.toxicity-feedback-form {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.toxicity-feedback-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toxicity-feedback-section {
+  margin-bottom: 1.5rem;
+}
+
+.toxicity-feedback-question {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+/* Relevance Radio Buttons */
+.toxicity-feedback-options {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.toxicity-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.toxicity-radio-label input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.toxicity-radio-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  color: #495057;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.toxicity-radio-label input:checked + .toxicity-radio-button {
+  background-color: #4361ee;
+  color: white;
+}
+
+/* Feedback Labels Section */
+.toxicity-feedback-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Other feedback input */
+.toxicity-other-input-container {
+  margin-top: 0.75rem;
+  width: 100%;
+}
+
+.toxicity-other-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  transition: all var(--transition-speed);
+}
+
+.toxicity-other-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.toxicity-feedback-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  background-color: #e9ecef;
+  color: #495057;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.toxicity-label-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #dee2e6;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.toxicity-feedback-label:hover {
+  background-color: #dee2e6;
+}
+
+.toxicity-feedback-label.selected {
+  background-color: #e1e8ff;
+  border-color: #4361ee;
+  color: #3a0ca3;
+}
+
+.toxicity-feedback-label.selected .toxicity-label-number {
+  background-color: #4361ee;
+  color: white;
+}
+
+/* Rating Stars */
+.toxicity-rating {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.toxicity-rating-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  color: #495057;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.toxicity-rating-button:hover {
+  background-color: #d8e2f3;
+  transform: translateY(-2px);
+}
+
+.toxicity-rating-button.selected {
+  background-color: #4361ee;
+  color: white;
+}
+
+/* Feedback Actions */
+.toxicity-feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.toxicity-feedback-cancel {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  color: #495057;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toxicity-feedback-cancel:hover {
+  background-color: #e9ecef;
+}
+
+.toxicity-feedback-submit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+
+.toxicity-feedback-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(64, 150, 255, 0.2);
+}
+
+.toxicity-feedback-submit:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design for Feedback Form */
+@media (max-width: 768px) {
+  .toxicity-feedback-labels {
+    gap: 0.5rem;
+  }
+  
+  .toxicity-feedback-label {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .toxicity-rating {
+    gap: 0.25rem;
+  }
+  
+  .toxicity-rating-button {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toxicity-feedback-options {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .toxicity-feedback-actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+  
+  .toxicity-feedback-cancel, 
+  .toxicity-feedback-submit {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .toxicity-feedback-form {
+    padding: 1rem;
+  }
+}

@@ -8,7 +8,11 @@ import {
     BarChart2,
     Globe,
     FileText,
-    Activity
+    Activity,
+    ThumbsUp,
+    ThumbsDown,
+    MessageCircle,
+    Send
 } from 'lucide-react';
 import './checker.css';
 
@@ -20,6 +24,16 @@ const ToxicityChecker = () => {
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [error, setError] = useState(null);
     const recognitionRef = useRef(null);
+
+    const [showFeedback, setShowFeedback] = useState(false);
+    const [feedbackInitiated, setFeedbackInitiated] = useState(false);
+    const [feedbackRating, setFeedbackRating] = useState(5);
+    const [feedbackLabels, setFeedbackLabels] = useState([]);
+    const [feedbackComment, setFeedbackComment] = useState('');
+    const [otherFeedback, setOtherFeedback] = useState('');
+    const [showOtherInput, setShowOtherInput] = useState(false);
+    const [helpfulAnswer, setHelpfulAnswer] = useState('');
+    const [responseRelevantAnswer, setResponseRelevantAnswer] = useState('');
 
     const languages = [
         { code: 'hi', name: 'Hindi', transliterateCode: 'hi', disabled: false },
@@ -34,8 +48,26 @@ const ToxicityChecker = () => {
         { code: 'kn', name: 'Kannada', transliterateCode: 'kn', disabled: true },
         { code: 'or', name: 'Odia', transliterateCode: 'or', disabled: true },
         { code: 'en', name: 'English', transliterateCode: 'en', disabled: true }
-
     ];
+
+    const availableFeedbackLabels = [
+        { id: 1, label: 'Violent Crimes' },
+        { id: 2, label: 'Non-Violent Crimes' },
+        { id: 3, label: 'Sex-Related Crimes' },
+        { id: 4, label: 'Child Sexual Exploitation' },
+        { id: 5, label: 'Defamation' },
+        { id: 6, label: 'Specialized Advice' },
+        { id: 7, label: 'Privacy' },
+        { id: 8, label: 'Intellectual Property' },
+        { id: 9, label: 'Indiscriminate Weapons' },
+        { id: 10, label: 'Hate' },
+        { id: 11, label: 'Suicide & Self-Harm' },
+        { id: 12, label: 'Sexual Content' },
+        { id: 13, label: 'Elections' },
+        { id: 14, label: 'Code Interpreter Abuse' },
+        { id: 15, label: 'Other' }
+    ];
+
     useEffect(() => {
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -79,7 +111,7 @@ const ToxicityChecker = () => {
         }
     };
 
-    const analyzeToxicity = async () => {
+    const analyzeToxicity = async (withFeedback = false) => {
         if (!text.trim()) {
             setError('Please enter some text to analyze.');
             return;
@@ -89,19 +121,51 @@ const ToxicityChecker = () => {
         setIsAnalyzing(true);
 
         try {
+            const payload = {
+                text,
+                lang: selectedLanguage
+            };
+
+            if (withFeedback) {
+                payload.was_helpful = helpfulAnswer;
+                payload.response_relevant = responseRelevantAnswer;
+                payload.feedback_rating = feedbackRating;
+                payload.feedback_labels = feedbackLabels.map(id => {
+                    const label = availableFeedbackLabels.find(label => label.id === id)?.label;
+                    return label === 'Other' ? `Other: ${otherFeedback}` : label;
+                });
+                payload.other_feedback = otherFeedback;
+            }
+
             const response = await fetch("http://127.0.0.1:2026/predict", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text, lang: selectedLanguage }),
+                body: JSON.stringify(payload)
             });
 
             const data = await response.json();
+
             if (!response.ok || data.error) {
                 throw new Error(data.error || "Failed to fetch toxicity analysis.");
             }
 
             setToxicityScore(data.toxicity);
+
+            if (withFeedback) {
+                alert("✅ Feedback submitted successfully!");
+                // Reset feedback form after submission
+                setFeedbackInitiated(false);
+                setHelpfulAnswer('');
+                setResponseRelevantAnswer('');
+                setFeedbackRating(5);
+                setFeedbackLabels([]);
+                setOtherFeedback('');
+                setShowOtherInput(false);
+                setShowFeedback(false);
+            }
+
         } catch (error) {
+            console.error("⚠️ Error:", error.message);
             setError(error.message);
         } finally {
             setIsAnalyzing(false);
@@ -118,6 +182,31 @@ const ToxicityChecker = () => {
         } else {
             return { message: 'Highly Toxic', className: 'high', icon: '🤬' };
         }
+    };
+
+    const initiateUserFeedback = () => {
+        setFeedbackRating(5);
+        setFeedbackLabels([]);
+        setFeedbackComment('');
+        setOtherFeedback('');
+        setShowOtherInput(false);
+        setFeedbackInitiated(true);
+    };
+
+    const toggleFeedbackLabel = (id) => {
+        setFeedbackLabels(prev => {
+            if (prev.includes(id)) {
+                if (id === 15) setShowOtherInput(false);
+                return prev.filter(labelId => labelId !== id);
+            } else {
+                if (id === 15) setShowOtherInput(true);
+                return [...prev, id];
+            }
+        });
+    };
+
+    const handleRatingChange = (rating) => {
+        setFeedbackRating(rating);
     };
 
     return (
@@ -182,7 +271,7 @@ const ToxicityChecker = () => {
                 </div>
 
                 <button
-                    onClick={analyzeToxicity}
+                    onClick={() => analyzeToxicity(false)}
                     className="toxicity-analyze-button"
                     disabled={isAnalyzing || !text.trim()}
                 >
@@ -217,17 +306,138 @@ const ToxicityChecker = () => {
                             <span className="toxicity-score-value">{toxicityScore}%</span>
                         </div>
 
-                        {(() => {
-                            const scoreInfo = getScoreInfo(toxicityScore);
-                            return (
-                                <div className={`toxicity-result-message ${scoreInfo.className}`}>
-                                    <div className="toxicity-message-content">
-                                        <span style={{ marginRight: '8px', fontSize: '1.2em' }}>{scoreInfo.icon}</span>
-                                        <h3>{scoreInfo.message}</h3>
+                        {!feedbackInitiated ? (
+                            <div className="toxicity-feedback-prompt">
+                                <p>Was this analysis helpful?</p>
+                                <div className="toxicity-feedback-buttons">
+                                    <button
+                                        className="toxicity-feedback-button"
+                                        onClick={() => {
+                                            setHelpfulAnswer('Yes');
+                                            initiateUserFeedback();
+                                        }}
+                                    >
+                                        <ThumbsUp size={18} />
+                                        Yes
+                                    </button>
+                                    <button
+                                        className="toxicity-feedback-button"
+                                        onClick={() => {
+                                            setHelpfulAnswer('No');
+                                            initiateUserFeedback();
+                                        }}
+                                    >
+                                        <ThumbsDown size={18} />
+                                        No
+                                    </button>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="toxicity-feedback-form">
+                                <h3 className="toxicity-feedback-title">
+                                    <MessageCircle size={18} />
+                                    Provide Your Feedback
+                                </h3>
+
+                                <div className="toxicity-feedback-section">
+                                    <p className="toxicity-feedback-question">Is the response relevant for the given prompt? *</p>
+                                    <div className="toxicity-feedback-options">
+                                      <label className="toxicity-radio-label">
+                                        <input
+                                          type="radio"
+                                          name="relevance"
+                                          value="Yes"
+                                          checked={responseRelevantAnswer === 'Yes'}
+                                          onChange={(e) => setResponseRelevantAnswer(e.target.value)}
+                                        />
+                                        <span className="toxicity-radio-button">✔</span>
+                                        <span>Yes</span>
+                                      </label>
+
+                                      <label className="toxicity-radio-label">
+                                        <input
+                                          type="radio"
+                                          name="relevance"
+                                          value="No"
+                                          checked={responseRelevantAnswer === 'No'}
+                                          onChange={(e) => setResponseRelevantAnswer(e.target.value)}
+                                        />
+                                        <span className="toxicity-radio-button">✖</span>
+                                        <span>No</span>
+                                      </label>
+                                    </div>
+
+
+                                </div>
+
+                                <div className="toxicity-feedback-section">
+                                    <p className="toxicity-feedback-question">Does the response include any of the following?</p>
+                                    <div className="toxicity-feedback-labels">
+                                        {availableFeedbackLabels.map(label => (
+                                            <div
+                                                key={label.id}
+                                                className={`toxicity-feedback-label ${feedbackLabels.includes(label.id) ? 'selected' : ''}`}
+                                                onClick={() => toggleFeedbackLabel(label.id)}
+                                            >
+                                                <span className="toxicity-label-number">{label.id}</span>
+                                                <span>{label.label}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {showOtherInput && (
+                                        <div className="toxicity-other-input-container">
+                                            <input
+                                                type="text"
+                                                className="toxicity-other-input"
+                                                placeholder="Please specify other feedback..."
+                                                value={otherFeedback}
+                                                onChange={(e) => setOtherFeedback(e.target.value)}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="toxicity-feedback-section">
+                                    <p className="toxicity-feedback-question">Rate the quality of the response: *</p>
+                                    <div className="toxicity-rating">
+                                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(rating => (
+                                            <button
+                                                key={rating}
+                                                className={`toxicity-rating-button ${feedbackRating === rating ? 'selected' : ''}`}
+                                                onClick={() => handleRatingChange(rating)}
+                                            >
+                                                {rating}
+                                            </button>
+                                        ))}
                                     </div>
                                 </div>
-                            );
-                        })()}
+
+                                <div className="toxicity-feedback-actions">
+                                    <button
+                                        className="toxicity-feedback-cancel"
+                                        onClick={() => {
+                                            setFeedbackInitiated(false);
+                                            setHelpfulAnswer('');
+                                            setResponseRelevantAnswer('');
+                                            setFeedbackRating(5);
+                                            setFeedbackLabels([]);
+                                            setOtherFeedback('');
+                                            setShowOtherInput(false);
+                                        }}
+                                    >
+                                        Discard
+                                    </button>
+                                    <button
+                                        className="toxicity-feedback-submit"
+                                        onClick={() => analyzeToxicity(true)}
+                                    >
+                                        <Send size={16} />
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
