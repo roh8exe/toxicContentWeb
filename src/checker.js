@@ -12,7 +12,8 @@ import {
     ThumbsUp,
     ThumbsDown,
     MessageCircle,
-    Send
+    Send,
+    CheckCircle
 } from 'lucide-react';
 import './checker.css';
 
@@ -34,6 +35,7 @@ const ToxicityChecker = () => {
     const [showOtherInput, setShowOtherInput] = useState(false);
     const [helpfulAnswer, setHelpfulAnswer] = useState('');
     const [responseRelevantAnswer, setResponseRelevantAnswer] = useState('');
+    const [feedbackSuccess, setFeedbackSuccess] = useState(false);
 
     const languages = [
         { code: 'hi', name: 'Hindi', transliterateCode: 'hi', disabled: false },
@@ -67,7 +69,20 @@ const ToxicityChecker = () => {
         { id: 14, label: 'Code Interpreter Abuse' },
         { id: 15, label: 'Other' }
     ];
-
+    
+    useEffect(() => {
+      let timeoutId;
+      if (feedbackSuccess) {
+          timeoutId = setTimeout(() => {
+              setFeedbackSuccess(false);
+          }, 15000);
+      }
+      
+      return () => {
+          if (timeoutId) clearTimeout(timeoutId);
+      };
+    }, [feedbackSuccess]);
+    
     useEffect(() => {
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -112,64 +127,65 @@ const ToxicityChecker = () => {
     };
 
     const analyzeToxicity = async (withFeedback = false) => {
-        if (!text.trim()) {
-            setError('Please enter some text to analyze.');
-            return;
-        }
+      if (!text.trim()) {
+          setError('Please enter some text to analyze.');
+          return;
+      }
 
-        setError(null);
-        setIsAnalyzing(true);
+      setError(null);
+      setIsAnalyzing(true);
 
-        try {
-            const payload = {
-                text,
-                lang: selectedLanguage
-            };
+      try {
+          const payload = { text, lang: selectedLanguage };
 
-            if (withFeedback) {
-                payload.was_helpful = helpfulAnswer;
-                payload.response_relevant = responseRelevantAnswer;
-                payload.feedback_rating = feedbackRating;
-                payload.feedback_labels = feedbackLabels.map(id => {
-                    const label = availableFeedbackLabels.find(label => label.id === id)?.label;
-                    return label === 'Other' ? `Other: ${otherFeedback}` : label;
-                });
-                payload.other_feedback = otherFeedback;
-            }
+          // Include feedback only if explicitly submitted
+          if (withFeedback) {
+              payload.was_helpful = helpfulAnswer;
+              payload.response_relevant = responseRelevantAnswer;
+              payload.feedback_rating = feedbackRating;
+              payload.feedback_labels = feedbackLabels.map(id => {
+                  const label = availableFeedbackLabels.find(label => label.id === id)?.label;
+                  return label === 'Other' ? `Other: ${otherFeedback}` : label;
+              });
+              payload.other_feedback = otherFeedback;
+              payload.log_to_sheet = true;  // explicit indicator for backend logging
+          } else {
+              payload.log_to_sheet = false;
+          }
 
-            const response = await fetch("http://127.0.0.1:2026/predict", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+          const response = await fetch("http://127.0.0.1:2026/predict", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload)
+          });
 
-            const data = await response.json();
+          const data = await response.json();
 
-            if (!response.ok || data.error) {
-                throw new Error(data.error || "Failed to fetch toxicity analysis.");
-            }
+          if (!response.ok || data.error) {
+              throw new Error(data.error || "Failed to fetch toxicity analysis.");
+          }
 
-            setToxicityScore(data.toxicity);
+          setToxicityScore(data.toxicity_score);
 
-            if (withFeedback) {
-                alert("✅ Feedback submitted successfully!");
-                // Reset feedback form after submission
-                setFeedbackInitiated(false);
-                setHelpfulAnswer('');
-                setResponseRelevantAnswer('');
-                setFeedbackRating(5);
-                setFeedbackLabels([]);
-                setOtherFeedback('');
-                setShowOtherInput(false);
-                setShowFeedback(false);
-            }
+          if (withFeedback) {
+              // Set feedback success state to true
+              setFeedbackSuccess(true);
+              setFeedbackInitiated(false);
+              setHelpfulAnswer('');
+              setResponseRelevantAnswer('');
+              setFeedbackRating(5);
+              setFeedbackLabels([]);
+              setOtherFeedback('');
+              setShowOtherInput(false);
+              setShowFeedback(false);
+          }
 
-        } catch (error) {
-            console.error("⚠️ Error:", error.message);
-            setError(error.message);
-        } finally {
-            setIsAnalyzing(false);
-        }
+      } catch (error) {
+          console.error("⚠️ Error:", error.message);
+          setError(error.message);
+      } finally {
+          setIsAnalyzing(false);
+      }
     };
 
     const getScoreInfo = (score) => {
@@ -306,32 +322,42 @@ const ToxicityChecker = () => {
                             <span className="toxicity-score-value">{toxicityScore}%</span>
                         </div>
 
-                        {!feedbackInitiated ? (
-                            <div className="toxicity-feedback-prompt">
-                                <p>Was this analysis helpful?</p>
-                                <div className="toxicity-feedback-buttons">
-                                    <button
-                                        className="toxicity-feedback-button"
-                                        onClick={() => {
-                                            setHelpfulAnswer('Yes');
-                                            initiateUserFeedback();
-                                        }}
-                                    >
-                                        <ThumbsUp size={18} />
-                                        Yes
-                                    </button>
-                                    <button
-                                        className="toxicity-feedback-button"
-                                        onClick={() => {
-                                            setHelpfulAnswer('No');
-                                            initiateUserFeedback();
-                                        }}
-                                    >
-                                        <ThumbsDown size={18} />
-                                        No
-                                    </button>
-                                </div>
+                          {(() => {
+                          const scoreInfo = getScoreInfo(toxicityScore);
+                          return (
+                              <div className={`toxicity-result-message ${scoreInfo.className}`}>
+                                  <div className="toxicity-message-content">
+                                      <span style={{ marginRight: '8px', fontSize: '1.2em' }}>{scoreInfo.icon}</span>
+                                      <h3>{scoreInfo.message}</h3>
+                                  </div>
+                              </div>
+                          );
+                      })()}
+                          
+                        {/* Success message - placed inside the results container */}
+                        {feedbackSuccess && (
+                            <div className="toxicity-success-message">
+                                <CheckCircle size={18} />
+                                Thank you for your feedback! Your response has been successfully submitted.
                             </div>
+                        )}
+
+                        {!feedbackInitiated ? (
+                             <div className="toxicity-feedback-prompt">
+                             <p>Provide feedback</p>
+                             <div className="toxicity-feedback-buttons">
+                                 <button
+                                     className="toxicity-feedback-button"
+                                     onClick={() => {
+                                         setHelpfulAnswer('Yes');
+                                         initiateUserFeedback();
+                                     }}
+                                 >
+                                     <ThumbsUp size={18} />
+                                     Yes
+                                 </button>
+                             </div>
+                         </div>
                         ) : (
                             <div className="toxicity-feedback-form">
                                 <h3 className="toxicity-feedback-title">
@@ -366,8 +392,6 @@ const ToxicityChecker = () => {
                                         <span>No</span>
                                       </label>
                                     </div>
-
-
                                 </div>
 
                                 <div className="toxicity-feedback-section">

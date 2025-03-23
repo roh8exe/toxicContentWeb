@@ -818,3 +818,50 @@
     padding: 1rem;
   }
 }
+
+/* Success Message Styling */
+.toxicity-success-message {
+  margin-top: 1.25rem;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-left: 4px solid #4caf50;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  animation: slideInFadeIn 0.5s ease-out;
+}
+
+.toxicity-success-message svg {
+  color: #4caf50;
+  flex-shrink: 0;
+}
+
+@keyframes slideInFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add a fade-out animation */
+.toxicity-success-message.fade-out {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
