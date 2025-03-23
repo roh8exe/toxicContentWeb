@@ -12,6 +12,7 @@ import './App.css';
 import './animations.css';
 import './bubble.css';
 import './shield-illustration.css';
+import ModelComparison from './ModelComparison';
 
 const WebsiteWithToxicityChecker = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -170,6 +171,7 @@ const WebsiteWithToxicityChecker = () => {
     
     <div ref={toxicityCheckerRef} className="checker-container animate-on-scroll" id="toxicity-checker"> 
       <ToxicityChecker/>
+      <ModelComparison />
     </div>
   </div>
 </section>
