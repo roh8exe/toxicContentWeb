@@ -32,7 +32,7 @@ const ModelComparison = () => {
   };
 
   const getScoreClass = (score) => {
-    if (typeof score === 'string') return 'na';  // Add handling for "NA" values
+    if (typeof score === 'string') return 'na';
     if (score >= 84) return 'excellent';
     if (score >= 80) return 'good';
     return 'moderate';
@@ -42,148 +42,69 @@ const ModelComparison = () => {
     return typeof score === 'string' ? score : `${score}%`;
   };
 
+  const languages = Object.keys(modelData);
+
   return (
     <div className="model-comparison-section">
       <div className="comparison-header">
         <BarChart2 size={24} />
         <h2>Model Performance Comparison</h2>
-        <p>See how UnityAI-Guard performs against other leading models</p>
+        <p>See how UnityAI-Guard performs against other leading models across Indian languages</p>
       </div>
 
-      <div className="comparison-grid">
-        <div className="comparison-card">
-          <div className="card-header">
-            <h3>Hindi</h3>
-            <Globe size={20} />
-          </div>
-          <div className="scores-container">
-            <div className="score-item">
-              <span className="model-name">UnityAI-Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.hindi.unityAI)}`}>
-                {formatScore(modelData.hindi.unityAI)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">LLaMA Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.hindi.llamaGuard)}`}>
-                {formatScore(modelData.hindi.llamaGuard)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">Perspective API</span>
-              <div className={`score-badge ${getScoreClass(modelData.hindi.perspective)}`}>
-                {formatScore(modelData.hindi.perspective)}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="comparison-card">
-          <div className="card-header">
-            <h3>Telugu</h3>
-            <Globe size={20} />
-          </div>
-          <div className="scores-container">
-            <div className="score-item">
-              <span className="model-name">UnityAI-Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.telugu.unityAI)}`}>
-                {formatScore(modelData.telugu.unityAI)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">LLaMA Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.telugu.llamaGuard)}`}>
-                {formatScore(modelData.telugu.llamaGuard)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">Perspective API</span>
-              <div className={`score-badge ${getScoreClass(modelData.telugu.perspective)}`}>
-                {formatScore(modelData.telugu.perspective)}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="comparison-card">
-          <div className="card-header">
-            <h3>Marathi</h3>
-            <Globe size={20} />
-          </div>
-          <div className="scores-container">
-            <div className="score-item">
-              <span className="model-name">UnityAI-Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.marathi.unityAI)}`}>
-                {formatScore(modelData.marathi.unityAI)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">LLaMA Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.marathi.llamaGuard)}`}>
-                {formatScore(modelData.marathi.llamaGuard)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">Perspective API</span>
-              <div className={`score-badge ${getScoreClass(modelData.marathi.perspective)}`}>
-                {formatScore(modelData.marathi.perspective)}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="comparison-card">
-          <div className="card-header">
-            <h3>Punjabi</h3>
-            <Globe size={20} />
-          </div>
-          <div className="scores-container">
-            <div className="score-item">
-              <span className="model-name">UnityAI-Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.punjabi.unityAI)}`}>
-                {formatScore(modelData.punjabi.unityAI)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">LLaMA Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.punjabi.llamaGuard)}`}>
-                {formatScore(modelData.punjabi.llamaGuard)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">Perspective API</span>
-              <div className={`score-badge ${getScoreClass(modelData.punjabi.perspective)}`}>
-                {formatScore(modelData.punjabi.perspective)}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="comparison-card">
-          <div className="card-header">
-            <h3>Urdu</h3>
-            <Globe size={20} />
-          </div>
-          <div className="scores-container">
-            <div className="score-item">
-              <span className="model-name">UnityAI-Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.urdu.unityAI)}`}>
-                {formatScore(modelData.urdu.unityAI)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">LLaMA Guard</span>
-              <div className={`score-badge ${getScoreClass(modelData.urdu.llamaGuard)}`}>
-                {formatScore(modelData.urdu.llamaGuard)}
-              </div>
-            </div>
-            <div className="score-item">
-              <span className="model-name">Perspective API</span>
-              <div className={`score-badge ${getScoreClass(modelData.urdu.perspective)}`}>
-                {formatScore(modelData.urdu.perspective)}
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="comparison-table-container">
+        <table className="comparison-table">
+          <thead>
+            <tr>
+              <th className="language-header">Language</th>
+              <th className="model-header">
+                <div className="model-header-content">
+                  <span className="model-title">UnityAI-Guard</span>
+                  <Award size={16} className="model-icon" />
+                </div>
+              </th>
+              <th className="model-header">
+                <div className="model-header-content">
+                  <span className="model-title">LLaMA Guard</span>
+                  <TrendingUp size={16} className="model-icon" />
+                </div>
+              </th>
+              <th className="model-header">
+                <div className="model-header-content">
+                  <span className="model-title">Perspective API</span>
+                  <Globe size={16} className="model-icon" />
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {languages.map((language) => (
+              <tr key={language} className="language-row">
+                <td className="language-cell">
+                  <div className="language-name">
+                    <Globe size={16} className="language-icon" />
+                    <span>{language.charAt(0).toUpperCase() + language.slice(1)}</span>
+                  </div>
+                </td>
+                <td className="score-cell">
+                  <div className={`score-badge ${getScoreClass(modelData[language].unityAI)}`}>
+                    {formatScore(modelData[language].unityAI)}
+                  </div>
+                </td>
+                <td className="score-cell">
+                  <div className={`score-badge ${getScoreClass(modelData[language].llamaGuard)}`}>
+                    {formatScore(modelData[language].llamaGuard)}
+                  </div>
+                </td>
+                <td className="score-cell">
+                  <div className={`score-badge ${getScoreClass(modelData[language].perspective)}`}>
+                    {formatScore(modelData[language].perspective)}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
