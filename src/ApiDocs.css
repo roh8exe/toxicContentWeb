@@ -865,6 +865,68 @@
 }
 
 /* ================================
+    Disclaimer Box
+================================ */
+.disclaimer-box {
+  background-color: #fff8f1;
+  border: 1px solid #ffe0bc;
+  border-left: 4px solid #ff9800;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0 3rem 0;
+  display: flex;
+  gap: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.disclaimer-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background-color: #fff2e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff9800;
+}
+
+.disclaimer-content {
+  flex: 1;
+}
+
+.disclaimer-content h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #b45309;
+  margin-bottom: 0.75rem;
+}
+
+.disclaimer-content p {
+  color: #7c4a03;
+  margin-bottom: 0.75rem;
+}
+
+.disclaimer-content ul {
+  margin-left: 1.5rem;
+  color: #7c4a03;
+}
+
+.disclaimer-content li {
+  margin-bottom: 0.5rem;
+  list-style-type: disc;
+}
+
+@media (max-width: 768px) {
+  .disclaimer-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* ================================
     Animations & Effects
 ================================ */
 .gradient-text {

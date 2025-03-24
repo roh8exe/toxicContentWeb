@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Copy, Check, ChevronLeft, Globe, Code, Server, Shield, Lock, Terminal, FileCode } from 'lucide-react';
+import { Copy, Check, ChevronLeft, Globe, Code, Server, Shield, Lock, Terminal, FileCode, AlertTriangle } from 'lucide-react';
 import './ApiDocs.css';
 import './animations.css';
 import './bubble.css';
@@ -226,217 +226,6 @@ axios.post('https://lingo.iitgn.ac.in/unityai-guard/api', data, { headers })
 
           <div className="section-divider"></div>
 
-          {/* Endpoint Card */}
-          <div className="api-docs-card animate-on-scroll" id="endpoint-card">
-            <div className="card-icon">
-              <Server size={20} />
-            </div>
-            <h3 className="card-title">API Endpoint</h3>
-            <div className="code-block-container">
-              <div className="code-title-bar">
-                <div className="title">
-                  <span className="dot red"></span>
-                  <span className="dot yellow"></span>
-                  <span className="dot green"></span>
-                  <span>endpoint.txt</span>
-                </div>
-                <span className="language-tag">URL</span>
-                <button 
-                  className="code-copy-button"
-                  onClick={() => copyToClipboard('https://lingo.iitgn.ac.in/unityai-guard/api', 'endpoint')}
-                >
-                  {copiedSnippet['endpoint'] ? <Check size={14} /> : <Copy size={14} />}
-                  {copiedSnippet['endpoint'] ? 'Copied' : 'Copy'}
-                </button>
-              </div>
-              <code className="code-block">
-                POST https://lingo.iitgn.ac.in/unityai-guard/api
-              </code>
-            </div>
-          </div>
-
-          {/* Authentication Card */}
-          <div className="api-docs-card animate-on-scroll" id="auth-card">
-            <div className="card-icon">
-              <Lock size={20} />
-            </div>
-            <h3 className="card-title">Authentication</h3>
-            <p>Add your API key to the request headers:</p>
-            <div className="code-block-container">
-              <div className="code-title-bar">
-                <div className="title">
-                  <span className="dot red"></span>
-                  <span className="dot yellow"></span>
-                  <span className="dot green"></span>
-                  <span>auth-header.txt</span>
-                </div>
-                <span className="language-tag">HTTP</span>
-                <button 
-                  className="code-copy-button"
-                  onClick={() => copyToClipboard('X-API-Key: your_api_key_here', 'auth')}
-                >
-                  {copiedSnippet['auth'] ? <Check size={14} /> : <Copy size={14} />}
-                  {copiedSnippet['auth'] ? 'Copied' : 'Copy'}
-                </button>
-              </div>
-              <code className="code-block">
-                X-API-Key: your_api_key_here
-              </code>
-            </div>
-          </div>
-
-          {/* Request Structure Card */}
-          <div className="api-docs-card animate-on-scroll" id="request-card">
-            <div className="card-icon">
-              <Code size={20} />
-            </div>
-            <h3 className="card-title">Request Body</h3>
-            <div className="code-block-container">
-              <div className="code-title-bar">
-                <div className="title">
-                  <span className="dot red"></span>
-                  <span className="dot yellow"></span>
-                  <span className="dot green"></span>
-                  <span>request.json</span>
-                </div>
-                <span className="language-tag">JSON</span>
-                <button 
-                  className="code-copy-button"
-                  onClick={() => copyToClipboard('{\n  "text": "तू बहुत गंदा है",\n  "lang": "hi"\n}', 'request')}
-                >
-                  {copiedSnippet['request'] ? <Check size={14} /> : <Copy size={14} />}
-                  {copiedSnippet['request'] ? 'Copied' : 'Copy'}
-                </button>
-              </div>
-              <pre className="code-block code-json" dangerouslySetInnerHTML={{
-                __html: `{
-    <span class="key">"text"</span>: <span class="string">"तू बहुत गंदा है"</span>,
-    <span class="key">"lang"</span>: <span class="string">"hi"</span>
-  }`
-              }} />
-            </div>
-          </div>
-
-          {/* Code Samples Card */}
-          <div className="api-docs-card animate-on-scroll" id="code-samples-card">
-            <div className="card-icon">
-              <FileCode size={20} />
-            </div>
-            <h3 className="card-title">Code Samples</h3>
-            <div className="tabs">
-              <div className="tab-buttons">
-                {['python', 'nodejs', 'curl'].map(tab => (
-                  <button
-                    key={tab}
-                    className={`tab-button ${activeTab === tab ? 'active-tab' : ''}`}
-                    onClick={() => handleTabClick(tab)}
-                  >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                  </button>
-                ))}
-              </div>
-
-              <div className="tab-content">
-                <div className="code-block-container">
-                  <div className="code-title-bar">
-                    <div className="title">
-                      <span className="dot red"></span>
-                      <span className="dot yellow"></span>
-                      <span className="dot green"></span>
-                      <span>example.{activeTab === 'nodejs' ? 'js' : activeTab}</span>
-                    </div>
-                    <span className="language-tag">{activeTab}</span>
-                    <button 
-                      className="code-copy-button"
-                      onClick={() => copyToClipboard(codeSnippets[activeTab], activeTab)}
-                    >
-                      {copiedSnippet[activeTab] ? <Check size={14} /> : <Copy size={14} />}
-                      {copiedSnippet[activeTab] ? 'Copied' : 'Copy'}
-                    </button>
-                  </div>
-                  <pre className={`code-block code-${activeTab}`}>
-                    {codeSnippets[activeTab]}
-                  </pre>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Sample Response Card */}
-          <div className="api-docs-card animate-on-scroll" id="response-card">
-            <div className="card-icon">
-              <Server size={20} />
-            </div>
-            <h3 className="card-title">Sample Response</h3>
-            <div className="code-block-container">
-              <div className="code-title-bar">
-                <div className="title">
-                  <span className="dot red"></span>
-                  <span className="dot yellow"></span>
-                  <span className="dot green"></span>
-                  <span>response.json</span>
-                </div>
-                <span className="language-tag">JSON</span>
-                <button 
-                  className="code-copy-button"
-                  onClick={() => copyToClipboard('{\n  "confidence": 78.24,\n  "is_toxic": true,\n  "toxicity": 78.24\n}', 'response')}
-                >
-                  {copiedSnippet['response'] ? <Check size={14} /> : <Copy size={14} />}
-                  {copiedSnippet['response'] ? 'Copied' : 'Copy'}
-                </button>
-              </div>
-              <pre className="code-block code-json" dangerouslySetInnerHTML={{
-                __html: `{
-  <span class="key">"confidence"</span>: <span class="number">78.24</span>,
-  <span class="key">"is_toxic"</span>: <span class="boolean">true</span>,
-  <span class="key">"toxicity"</span>: <span class="number">78.24</span>
-}`
-              }} />
-            </div>
-          </div>
-
-          {/* Response Codes Card */}
-          <div className="api-docs-card animate-on-scroll" id="codes-card">
-            <div className="card-icon">
-              <Code size={20} />
-            </div>
-            <h3 className="card-title">Response Codes</h3>
-            <div className="table-container">
-              <table className="response-codes-table">
-                <thead>
-                  <tr>
-                    <th>Code</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>200</td><td>Success</td></tr>
-                  <tr><td>400</td><td>Bad Request - Invalid input</td></tr>
-                  <tr><td>401</td><td>Unauthorized - API key missing/invalid</td></tr>
-                  <tr><td>429</td><td>Rate Limit Exceeded</td></tr>
-                  <tr><td>500</td><td>Server Error</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Languages Note */}
-          <div className="api-docs-note animate-on-scroll" id="lang-note">
-            <p><strong>Note:</strong> Automatic language detection is coming soon!</p>
-            <p><strong>Supported Languages:</strong></p>
-            
-            <div className="language-chips">
-              {supportedLanguages.map(lang => (
-                <div key={lang.code} className="language-chip">
-                  {lang.name}
-                  <span className="language-chip-code">{lang.code}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="section-divider"></div>
-
           {/* API Key Generator Card */}
           <div className="api-docs-card api-key-section animate-on-scroll" id="api-key-card">
             <div className="card-icon">
@@ -535,6 +324,231 @@ axios.post('https://lingo.iitgn.ac.in/unityai-guard/api', data, { headers })
                 </button>
               </form>
             )}
+          </div>
+
+          {/* Disclaimer Box MOVED BELOW API KEY SECTION */}
+          <div className="disclaimer-box animate-on-scroll" id="disclaimer">
+            <div className="disclaimer-icon">
+              <AlertTriangle size={20} />
+            </div>
+            <div className="disclaimer-content">
+              <h4>Important Notice</h4>
+              <p>By using this API, you acknowledge that:</p>
+              <ul>
+                <li>Text inputs will be logged anonymously and may be used to improve our models</li>
+                <li>The API is provided for research and educational purposes only</li>
+                <li>Detection results may not be 100% accurate and should be used as guidance only</li>
+                <li>You are responsible for compliance with applicable laws and regulations</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Endpoint Card */}
+          <div className="api-docs-card animate-on-scroll" id="endpoint-card">
+            <div className="card-icon">
+              <Server size={20} />
+            </div>
+            <h3 className="card-title">API Endpoint</h3>
+            <div className="code-block-container">
+              <div className="code-title-bar">
+                <div className="title">
+                  <span className="dot red"></span>
+                  <span className="dot yellow"></span>
+                  <span className="dot green"></span>
+                  <span>endpoint.txt</span>
+                </div>
+                <span className="language-tag">URL</span>
+                <button 
+                  className="code-copy-button"
+                  onClick={() => copyToClipboard('https://lingo.iitgn.ac.in/unityai-guard/api', 'endpoint')}
+                >
+                  {copiedSnippet['endpoint'] ? <Check size={14} /> : <Copy size={14} />}
+                  {copiedSnippet['endpoint'] ? 'Copied' : 'Copy'}
+                </button>
+              </div>
+              <code className="code-block">
+                POST https://lingo.iitgn.ac.in/unityai-guard/api
+              </code>
+            </div>
+          </div>
+
+          {/* Authentication Card */}
+          <div className="api-docs-card animate-on-scroll" id="auth-card">
+            <div className="card-icon">
+              <Lock size={20} />
+            </div>
+            <h3 className="card-title">Authentication</h3>
+            <p>Add your API key to the request headers:</p>
+            <div className="code-block-container">
+              <div className="code-title-bar">
+                <div className="title">
+                  <span className="dot red"></span>
+                  <span className="dot yellow"></span>
+                  <span className="dot green"></span>
+                  <span>auth-header.txt</span>
+                </div>
+                <span className="language-tag">HTTP</span>
+                <button 
+                  className="code-copy-button"
+                  onClick={() => copyToClipboard('X-API-Key: your_api_key_here', 'auth')}
+                >
+                  {copiedSnippet['auth'] ? <Check size={14} /> : <Copy size={14} />}
+                  {copiedSnippet['auth'] ? 'Copied' : 'Copy'}
+                </button>
+              </div>
+              <code className="code-block">
+                X-API-Key: your_api_key_here
+              </code>
+            </div>
+          </div>
+
+          {/* Languages Note MOVED UP */}
+          <div className="api-docs-note animate-on-scroll" id="lang-note">
+            <p><strong>Note:</strong> Automatic language detection is coming soon!</p>
+            <p><strong>Supported Languages:</strong></p>
+            
+            <div className="language-chips">
+              {supportedLanguages.map(lang => (
+                <div key={lang.code} className="language-chip">
+                  {lang.name}
+                  <span className="language-chip-code">{lang.code}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Request Structure Card */}
+          <div className="api-docs-card animate-on-scroll" id="request-card">
+            <div className="card-icon">
+              <Code size={20} />
+            </div>
+            <h3 className="card-title">Request Body</h3>
+            <div className="code-block-container">
+              <div className="code-title-bar">
+                <div className="title">
+                  <span className="dot red"></span>
+                  <span className="dot yellow"></span>
+                  <span className="dot green"></span>
+                  <span>request.json</span>
+                </div>
+                <span className="language-tag">JSON</span>
+                <button 
+                  className="code-copy-button"
+                  onClick={() => copyToClipboard('{\n  "text": "तू बहुत गंदा है",\n  "lang": "hi"\n}', 'request')}
+                >
+                  {copiedSnippet['request'] ? <Check size={14} /> : <Copy size={14} />}
+                  {copiedSnippet['request'] ? 'Copied' : 'Copy'}
+                </button>
+              </div>
+              <pre className="code-block code-json" dangerouslySetInnerHTML={{
+                __html: `{
+    <span class="key">"text"</span>: <span class="string">"तू बहुत गंदा है"</span>,
+    <span class="key">"lang"</span>: <span class="string">"hi"</span>
+  }`
+              }} />
+            </div>
+          </div>
+
+          {/* Code Samples Card */}
+          <div className="api-docs-card animate-on-scroll" id="code-samples-card">
+            <div className="card-icon">
+              <FileCode size={20} />
+            </div>
+            <h3 className="card-title">Code Samples</h3>
+            <div className="tabs">
+              <div className="tab-buttons">
+                {['python', 'nodejs', 'curl'].map(tab => (
+                  <button
+                    key={tab}
+                    className={`tab-button ${activeTab === tab ? 'active-tab' : ''}`}
+                    onClick={() => handleTabClick(tab)}
+                  >
+                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  </button>
+                ))}
+              </div>
+
+              <div className="tab-content">
+                <div className="code-block-container">
+                  <div className="code-title-bar">
+                    <div className="title">
+                      <span className="dot red"></span>
+                      <span className="dot yellow"></span>
+                      <span className="dot green"></span>
+                      <span>example.{activeTab === 'nodejs' ? 'js' : activeTab}</span>
+                    </div>
+                    <span className="language-tag">{activeTab}</span>
+                    <button 
+                      className="code-copy-button"
+                      onClick={() => copyToClipboard(codeSnippets[activeTab], activeTab)}
+                    >
+                      {copiedSnippet[activeTab] ? <Check size={14} /> : <Copy size={14} />}
+                      {copiedSnippet[activeTab] ? 'Copied' : 'Copy'}
+                    </button>
+                  </div>
+                  <pre className={`code-block code-${activeTab}`}>
+                    {codeSnippets[activeTab]}
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sample Response Card */}
+          <div className="api-docs-card animate-on-scroll" id="response-card">
+            <div className="card-icon">
+              <Server size={20} />
+            </div>
+            <h3 className="card-title">Sample Response</h3>
+            <div className="code-block-container">
+              <div className="code-title-bar">
+                <div className="title">
+                  <span className="dot red"></span>
+                  <span className="dot yellow"></span>
+                  <span className="dot green"></span>
+                  <span>response.json</span>
+                </div>
+                <span className="language-tag">JSON</span>
+                <button 
+                  className="code-copy-button"
+                  onClick={() => copyToClipboard('{\n  "confidence": 78.24,\n  "is_toxic": true,\n}', 'response')}
+                >
+                  {copiedSnippet['response'] ? <Check size={14} /> : <Copy size={14} />}
+                  {copiedSnippet['response'] ? 'Copied' : 'Copy'}
+                </button>
+              </div>
+              <pre className="code-block code-json" dangerouslySetInnerHTML={{
+                __html: `{
+  <span class="key">"confidence"</span>: <span class="number">78.24</span>,
+  <span class="key">"is_toxic"</span>: <span class="boolean">true</span>
+}`
+              }} />
+            </div>
+          </div>
+
+          {/* Response Codes Card */}
+          <div className="api-docs-card animate-on-scroll" id="codes-card">
+            <div className="card-icon">
+              <Code size={20} />
+            </div>
+            <h3 className="card-title">Response Codes</h3>
+            <div className="table-container">
+              <table className="response-codes-table">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>200</td><td>Success</td></tr>
+                  <tr><td>400</td><td>Bad Request - Invalid input</td></tr>
+                  <tr><td>401</td><td>Unauthorized - API key missing/invalid</td></tr>
+                  <tr><td>429</td><td>Rate Limit Exceeded</td></tr>
+                  <tr><td>500</td><td>Server Error</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
