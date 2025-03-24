@@ -13,12 +13,21 @@ import './animations.css';
 import './bubble.css';
 import './shield-illustration.css';
 import ModelComparison from './ModelComparison';
+import ApiDocs from './ApiDocs';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
 const WebsiteWithToxicityChecker = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [visibleSections, setVisibleSections] = useState({});
+  const navigate = useNavigate();
+
+  const goToApiDocs = () => {
+  navigate('/api');
+  setIsMenuOpen(false); // Close mobile menu if open
+  };
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -118,6 +127,7 @@ const WebsiteWithToxicityChecker = () => {
             <a onClick={() => scrollToSection(homeRef)} className="nav-link hover-effect">Home</a>
             <a onClick={() => scrollToSection(aboutRef)} className="nav-link hover-effect">About Us</a>
             <a onClick={() => scrollToSection(processRef)} className="nav-link hover-effect">Work Process</a>
+            <a onClick={goToApiDocs} className="nav-link hover-effect">API</a>
             <a onClick={() => scrollToSection(teamRef)} className="nav-link hover-effect">Our Team</a>
             <a onClick={() => scrollToSection(contactRef)} className="nav-link hover-effect">Contact</a>
           </div>
@@ -139,6 +149,7 @@ const WebsiteWithToxicityChecker = () => {
           <button onClick={() => scrollToSection(homeRef)} className="mobile-menu-link">Home</button>
           <button onClick={() => scrollToSection(aboutRef)} className="mobile-menu-link">About Us</button>
           <button onClick={() => scrollToSection(processRef)} className="mobile-menu-link">Work Process</button>
+          <button onClick={goToApiDocs} className="mobile-menu-link">API</button>
           <button onClick={() => scrollToSection(teamRef)} className="mobile-menu-link">Our Team</button>
           <button onClick={() => scrollToSection(contactRef)} className="mobile-menu-link">Contact</button>
         </div>
@@ -276,4 +287,16 @@ const WebsiteWithToxicityChecker = () => {
   );
 };
 
-export default WebsiteWithToxicityChecker;
+// Main App component with routing
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<WebsiteWithToxicityChecker />} />
+        <Route path="/api" element={<ApiDocs />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

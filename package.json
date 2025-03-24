@@ -9,6 +9,7 @@
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^6.30.0",
     "react-scripts": "5.0.1",
     "react-transliterate": "^1.1.9",
     "web-vitals": "^4.2.4"

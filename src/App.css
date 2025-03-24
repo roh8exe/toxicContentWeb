@@ -563,3 +563,23 @@ button {
 .bg-white {
   background-color: white;
 }
+
+/* API button style */
+.nav-link.api-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.nav-link.api-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Mobile API button */
+.mobile-menu-link.api-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
