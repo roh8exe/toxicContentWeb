@@ -80,27 +80,7 @@
   overflow: visible;
 }
 
-.model-tooltip {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
-  z-index: 100;
-}
-
-.model-header-content:hover .model-tooltip {
-  opacity: 1;
-  visibility: visible;
-}
+/* Removed tooltip styles */
 
 .model-icon {
   color: #4b7bec;

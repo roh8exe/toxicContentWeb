@@ -94,7 +94,6 @@ const ModelComparison = () => {
                       size: 16, 
                       className: "model-icon" 
                     })}
-                    <span className="model-tooltip">{modelMetadata[modelKey].name}</span>
                   </div>
                 </th>
               ))}

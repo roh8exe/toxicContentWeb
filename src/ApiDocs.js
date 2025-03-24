@@ -142,7 +142,7 @@ axios.post('https://lingo.iitgn.ac.in/unityai-guard/api', data, { headers })
     { name: 'Telugu', code: 'te' },
     { name: 'Marathi', code: 'mr' },
     { name: 'Punjabi', code: 'pa' },
-    { name: 'Urdu', code: 'ur' },
+    { name: 'Urdu', code: 'ur' }
   ];
 
   return (
