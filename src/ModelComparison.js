@@ -62,12 +62,12 @@ const ModelComparison = () => {
 
   // Define model metadata for icons and displaynames
   const modelMetadata = {
-    unityAI: { icon: Award, name: "UnityAI-Guard", shortName: "UnityAI" },
-    llamaGuard: { icon: TrendingUp, name: "LLaMA Guard", shortName: "LLaMA" },
+    unityAI: { icon: Award, name: "UnityAI-Guard", shortName: "UnityAI-Guard" },
+    llamaGuard: { icon: TrendingUp, name: "LLaMA Guard", shortName: "LLaMA Guard" },
     mBERT: { icon: Server, name: "mBERT", shortName: "mBERT" },
-    llama32: { icon: Cpu, name: "Llama-3.2-1B", shortName: "Llama3.2" },
-    perspective: { icon: Globe, name: "Perspective API", shortName: "Perspect." },
-    ayaExpanse: { icon: Zap, name: "Aya-Expanse-8B", shortName: "Aya" }
+    llama32: { icon: Cpu, name: "Llama-3.2-1B", shortName: "Llama-3.2-1B" },
+    perspective: { icon: Globe, name: "Perspective API", shortName: "Perspective API" },
+    ayaExpanse: { icon: Zap, name: "Aya-Expanse-8B", shortName: "Aya-Expanse-8B" }
   };
 
   // Order the models in a specific sequence
