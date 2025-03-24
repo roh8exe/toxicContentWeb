@@ -25,6 +25,8 @@ const ToxicityChecker = () => {
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [error, setError] = useState(null);
     const recognitionRef = useRef(null);
+    const [logTimerId, setLogTimerId] = useState(null);
+
 
     const [showFeedback, setShowFeedback] = useState(false);
     const [feedbackInitiated, setFeedbackInitiated] = useState(false);
@@ -127,67 +129,107 @@ const ToxicityChecker = () => {
     };
 
     const analyzeToxicity = async (withFeedback = false) => {
-      if (!text.trim()) {
-          setError('Please enter some text to analyze.');
-          return;
-      }
-
-      setError(null);
-      setIsAnalyzing(true);
-
-      try {
-          const payload = { text, lang: selectedLanguage };
-
-          // Include feedback only if explicitly submitted
-          if (withFeedback) {
-              payload.was_helpful = helpfulAnswer;
-              payload.response_relevant = responseRelevantAnswer;
-              payload.feedback_rating = feedbackRating;
-              payload.feedback_labels = feedbackLabels.map(id => {
-                  const label = availableFeedbackLabels.find(label => label.id === id)?.label;
-                  return label === 'Other' ? `Other: ${otherFeedback}` : label;
-              });
-              payload.other_feedback = otherFeedback;
-              payload.log_to_sheet = true;  // explicit indicator for backend logging
-          } else {
-              payload.log_to_sheet = false;
-          }
-
-          const response = await fetch("http://127.0.0.1:2026/predict", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload)
-          });
-
-          const data = await response.json();
-
-          if (!response.ok || data.error) {
-              throw new Error(data.error || "Failed to fetch toxicity analysis.");
-          }
-
-          setToxicityScore(data.toxicity_score);
-
-          if (withFeedback) {
-              // Set feedback success state to true
-              setFeedbackSuccess(true);
-              setFeedbackInitiated(false);
-              setHelpfulAnswer('');
-              setResponseRelevantAnswer('');
-              setFeedbackRating(5);
-              setFeedbackLabels([]);
-              setOtherFeedback('');
-              setShowOtherInput(false);
-              setShowFeedback(false);
-          }
-
-      } catch (error) {
-          console.error("⚠️ Error:", error.message);
-          setError(error.message);
-      } finally {
-          setIsAnalyzing(false);
-      }
+        if (!text.trim()) {
+            setError('Please enter some text to analyze.');
+            return;
+        }
+    
+        setError(null);
+        setIsAnalyzing(true);
+    
+        try {
+            const predictionPayload = { text, lang: selectedLanguage };
+    
+            // Run prediction (analyze toxicity) first
+            const response = await fetch("http://127.0.0.1:2026/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(predictionPayload)
+            });
+    
+            const data = await response.json();
+    
+            if (!response.ok || data.error) {
+                throw new Error(data.error || "Failed to fetch toxicity analysis.");
+            }
+    
+            setToxicityScore(data.toxicity_score);
+    
+            // Cancel previous timer if it exists (prevent duplicate logs)
+            if (logTimerId) {
+                clearTimeout(logTimerId);
+                setLogTimerId(null);
+            }
+    
+            // If user submits feedback immediately
+            if (withFeedback) {
+                const feedbackPayload = {
+                    text,
+                    lang: selectedLanguage,
+                    toxicity: data.toxicity_score,
+                    classification: data.classification || '',
+                    confidence: data.confidence || '',
+                    was_helpful: helpfulAnswer,
+                    response_relevant: responseRelevantAnswer,
+                    feedback_rating: feedbackRating,
+                    feedback_labels: feedbackLabels.map(id => {
+                        const label = availableFeedbackLabels.find(label => label.id === id)?.label;
+                        return label === 'Other' ? `Other: ${otherFeedback}` : label;
+                    }),
+                    other_feedback: otherFeedback,
+                    log_to_sheet: true
+                };
+    
+                // Send final feedback log
+                await fetch("http://127.0.0.1:2026/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(feedbackPayload)
+                });
+    
+                // Reset feedback form states
+                setFeedbackSuccess(true);
+                setFeedbackInitiated(false);
+                setHelpfulAnswer('');
+                setResponseRelevantAnswer('');
+                setFeedbackRating(5);
+                setFeedbackLabels([]);
+                setOtherFeedback('');
+                setShowOtherInput(false);
+                setShowFeedback(false);
+            } else {
+                // No feedback yet - wait 30 seconds then log the prediction
+                const timerId = setTimeout(async () => {
+                    const delayedLogPayload = {
+                        text,
+                        lang: selectedLanguage,
+                        toxicity: data.toxicity_score,
+                        classification: data.classification || '',
+                        confidence: data.confidence || '',
+                        log_to_sheet: true
+                    };
+    
+                    await fetch("http://127.0.0.1:2026/predict", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(delayedLogPayload)
+                    });
+    
+                    // Clear the timer ID after logging
+                    setLogTimerId(null);
+                }, 30000); // 30-second delay before logging if no feedback submitted
+    
+                setLogTimerId(timerId);
+            }
+    
+        } catch (error) {
+            console.error("⚠️ Error:", error.message);
+            setError(error.message);
+        } finally {
+            setIsAnalyzing(false);
+        }
     };
-
+    
     const getScoreInfo = (score) => {
         if (score < 15) {
             return { message: 'Low Toxicity', className: 'low', icon: '😎' };
