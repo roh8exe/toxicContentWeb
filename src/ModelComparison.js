@@ -65,7 +65,7 @@ const ModelComparison = () => {
     unityAI: { icon: Award, name: "UnityAI-Guard", shortName: "UnityAI" },
     llamaGuard: { icon: TrendingUp, name: "LLaMA Guard", shortName: "LLaMA" },
     mBERT: { icon: Server, name: "mBERT", shortName: "mBERT" },
-    llama32: { icon: Cpu, name: "Llama-3.2-1B", shortName: "Llama-3.2" },
+    llama32: { icon: Cpu, name: "Llama-3.2-1B", shortName: "Llama3.2" },
     perspective: { icon: Globe, name: "Perspective API", shortName: "Perspect." },
     ayaExpanse: { icon: Zap, name: "Aya-Expanse-8B", shortName: "Aya" }
   };
