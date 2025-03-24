@@ -1051,3 +1051,13 @@
     max-width: 100%;
   }
 }
+
+.status-message {
+  margin-bottom: 12px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #fff3cd; /* Light yellow */
+  color: #856404;            /* Dark yellow text */
+  border: 1px solid #ffeeba;
+  font-size: 14px;
+}

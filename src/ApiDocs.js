@@ -17,34 +17,46 @@ const ApiDocs = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [copied, setCopied] = useState(false);
   const [copiedSnippet, setCopiedSnippet] = useState({});
+  const [statusMessage, setStatusMessage] = useState('');
+
 
   const handleTabClick = (tab) => setActiveTab(tab);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === 'email') {
+      setStatusMessage('');
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const generateApiKey = () => {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      const prefix = 'unityai-';
-      let result = prefix;
-      for (let i = 0; i < 24; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
+  
+    try {
+      const response = await fetch('http://localhost:5002/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        // Set the status message if email already exists or error occurs
+        setStatusMessage(data.message); // Example: "API key has already been generated with this email ID."
+        return;
       }
-      return result;
-    };
-
-    const newApiKey = generateApiKey();
-    setApiKey(newApiKey);
-    setFormSubmitted(true);
-
-    // Normally here you'd POST to your backend
-    console.log("User Data:", formData);
-    console.log("Generated API Key:", newApiKey);
+  
+      setApiKey(data.apiKey);
+      setFormSubmitted(true);
+      setStatusMessage(''); // Clear message if successful!
+    } catch (error) {
+      console.error('Error:', error);
+      setStatusMessage('Server error. Please try again later.');
+    }
   };
+  
+  
 
   const copyToClipboard = (text, id = 'apikey') => {
     navigator.clipboard.writeText(text);
@@ -318,7 +330,11 @@ axios.post('https://lingo.iitgn.ac.in/unityai-guard/api', data, { headers })
                     required
                   ></textarea>
                 </div>
-
+                {statusMessage && (
+                      <div className="status-message">
+                        {statusMessage}
+                      </div>
+                    )}
                 <button type="submit" className="analyze-button enhanced-button">
                   Request API Key
                 </button>
@@ -511,7 +527,7 @@ axios.post('https://lingo.iitgn.ac.in/unityai-guard/api', data, { headers })
                 <span className="language-tag">JSON</span>
                 <button 
                   className="code-copy-button"
-                  onClick={() => copyToClipboard('{\n  "confidence": 78.24,\n  "is_toxic": true,\n}', 'response')}
+                  onClick={() => copyToClipboard('{\n  "confidence": 78.24,\n  "is_toxic": true,\n,\n "toxicity": 78.24,\n}', 'response')}
                 >
                   {copiedSnippet['response'] ? <Check size={14} /> : <Copy size={14} />}
                   {copiedSnippet['response'] ? 'Copied' : 'Copy'}
@@ -519,8 +535,9 @@ axios.post('https://lingo.iitgn.ac.in/unityai-guard/api', data, { headers })
               </div>
               <pre className="code-block code-json" dangerouslySetInnerHTML={{
                 __html: `{
-  <span class="key">"confidence"</span>: <span class="number">78.24</span>,
-  <span class="key">"is_toxic"</span>: <span class="boolean">true</span>
+<span class="key">"confidence"</span>: <span class="number">78.24</span>,
+<span class="key">"is_toxic"</span>: <span class="boolean">true</span>,
+<span class="key">"toxicity"</span>: <span class="number">78.24</span>
 }`
               }} />
             </div>
