@@ -2,10 +2,12 @@
 
 /* Make sure content is visible */
 .enhanced-website {
-    position: relative;
-    z-index: 1; /* Ensure it's above the background bubbles */
-    overflow-x: hidden;
-  }
+  position: relative;
+  z-index: 1;
+  max-width: 100vw;
+  overflow: visible !important;  /* ✅ force remove nested scroll */
+}
+
   
   /* Enhanced Navigation */
   .enhanced-nav {
@@ -355,8 +357,12 @@
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s, transform 0.8s;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    display: block;
   }
+  
   
   .animate-on-scroll.animate-visible,
   #hero-title.animate-visible,
