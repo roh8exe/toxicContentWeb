@@ -406,10 +406,10 @@ const ToxicityChecker = () => {
                                  </button>
                              </div>
                              <div className="toxicity-disclaimer">
-                    <AlertTriangle size={14} />
-                    <p>We continuously monitor incoming requests to enhance system performance and respectfully request users to refrain from submitting any personal information.</p>
-                </div>
-            </div>
+                                <AlertTriangle size={14} />
+                                <p>We continuously monitor incoming requests to enhance system performance and respectfully request users to refrain from submitting any personal information.</p>
+                            </div>
+                         </div>
                         ) : (
                             <div className="toxicity-feedback-form">
                                 <h3 className="toxicity-feedback-title">
@@ -511,6 +511,10 @@ const ToxicityChecker = () => {
                                         <Send size={16} />
                                         Submit
                                     </button>
+                                </div>
+                                <div className="toxicity-disclaimer toxicity-disclaimer-in-form">
+                                    <AlertTriangle size={14} />
+                                    <p>We continuously monitor incoming requests to enhance system performance and respectfully request users to refrain from submitting any personal information.</p>
                                 </div>
                             </div>
                         )}

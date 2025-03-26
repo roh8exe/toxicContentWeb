@@ -866,7 +866,7 @@
   }
 }
 
-/* Optimized Disclaimer Styling for both placements */
+/* Complete Disclaimer Styling for all three positions */
 .toxicity-disclaimer {
   margin: 1.5rem 0;
   padding: 0.875rem 1.125rem;
@@ -907,6 +907,16 @@
   border-radius: 6px;
 }
 
+/* For the disclaimer at the bottom of the feedback form */
+.toxicity-disclaimer-in-form {
+  margin-top: 1.75rem;
+  font-size: 0.8rem;
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 248, 225, 0.5);
+  border-color: rgba(255, 193, 7, 0.2);
+  border-radius: 6px;
+}
+
 .toxicity-disclaimer svg {
   color: #e6a700;
   flex-shrink: 0;
@@ -940,17 +950,27 @@
   .toxicity-analyze-button + .toxicity-disclaimer {
     margin-top: 1.5rem;
   }
+  
+  .toxicity-disclaimer-in-form {
+    margin-top: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
   .toxicity-disclaimer {
     padding: 0.75rem;
     margin: 1rem 0;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   
-  .toxicity-feedback-prompt .toxicity-disclaimer {
+  .toxicity-feedback-prompt .toxicity-disclaimer,
+  .toxicity-disclaimer-in-form {
     padding: 0.75rem;
     font-size: 0.75rem;
+  }
+  
+  .toxicity-disclaimer svg {
+    width: 12px;
+    height: 12px;
   }
 }
