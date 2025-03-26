@@ -346,6 +346,12 @@ const ToxicityChecker = () => {
                         </>
                     )}
                 </button>
+                {toxicityScore === null && (
+                    <div className="toxicity-disclaimer">
+                        <AlertTriangle size={14} />
+                        <p>We continuously monitor incoming requests to enhance system performance and respectfully request users to refrain from submitting any personal information.</p>
+                    </div>
+                )}
 
                 {toxicityScore !== null && (
                     <div className="toxicity-results-container">
@@ -399,7 +405,11 @@ const ToxicityChecker = () => {
                                      Yes
                                  </button>
                              </div>
-                         </div>
+                             <div className="toxicity-disclaimer">
+                    <AlertTriangle size={14} />
+                    <p>We continuously monitor incoming requests to enhance system performance and respectfully request users to refrain from submitting any personal information.</p>
+                </div>
+            </div>
                         ) : (
                             <div className="toxicity-feedback-form">
                                 <h3 className="toxicity-feedback-title">
