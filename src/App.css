@@ -23,11 +23,6 @@ html, body {
   overflow-y: auto !important;  /* ✅ body scroll only */
 }
 
-
-
-
-
-
 /* Global styles */
 * {
   margin: 0;
@@ -211,10 +206,10 @@ button {
 
 /* Hero Section Styles */
 .hero-section {
-  min-height: 100vh; /* ✅ ensures full screen height without cutting content */
+  min-height: 90vh; /* ✅ ensures full screen height without cutting content */
   overflow: visible; /* ✅ allow internal content to be fully seen */
-  padding-top: 8rem; /* your original padding */
-  padding-bottom: 4rem;
+  padding-top: 2rem; /* your original padding */
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -223,7 +218,114 @@ button {
   background: var(--background-gradient-start);
 }
 
+.hero-section .section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 
+/* Layout for hero illustration and text */
+.hero-illustration-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+/* Text container */
+.hero-text-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Shield illustration container */
+.shield-illustration-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Checker container */
+.checker-container {
+  width: 100%;
+  margin-top: -3rem !important; /* Less negative margin */
+  scroll-margin-top: 80px;
+}
+
+/* For tablets and larger screens */
+@media (min-width: 768px) {
+  .hero-section {
+    padding-top: 5rem;
+  }
+}
+
+/* For desktop */
+@media (min-width: 992px) {
+  .checker-container {
+    margin-top: -4rem !important; /* Even stronger negative margin on desktop */
+  }
+  
+  .hero-illustration-layout {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
+  
+  .hero-text-container {
+    width: 50%;
+    text-align: left;
+    padding-right: 2rem;
+    margin-bottom: 0;
+  }
+  
+  .shield-illustration-container {
+    width: 50%;
+  }
+}
+
+/* Fix for bounce animation positioning */
+.animate-bounce-enhanced {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0.25rem auto;
+  cursor: pointer;
+  color: var(--primary-color);
+  animation: bounce 2s infinite;
+}
+
+@media (min-width: 992px) {
+  .animate-bounce-enhanced {
+    margin: 0.25rem 0;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+
+@media (min-width: 992px) {
+  .hero-subtitle {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
 
 .hero-title {
   font-size: 3.5rem;
@@ -241,7 +343,7 @@ button {
 .hero-subtitle {
   font-size: 1.4rem;
   color: var(--text-secondary);
-  margin-bottom: 2.5rem; /* Increased bottom margin */
+  margin-bottom: 0.5rem !important; /* Increased bottom margin */
   max-width: 100%; /* Full width to allow proper wrapping */
   position: relative;
   z-index: 10; /* High z-index to ensure text is above all elements */
@@ -260,8 +362,8 @@ button {
   overflow: hidden;
   border-right: 0.15em solid var(--primary-color);
   white-space: nowrap;
-  margin: 0 auto;
-  height: 2.5rem;
+  margin: 1 !important;
+  height: auto;
   animation: 
     typing 3.5s steps(40, end),
     blink-caret 0.75s step-end 8 0s,
@@ -358,13 +460,6 @@ button {
   }
 }
 
-.hero-illustration-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 3rem;
-}
 
 @media (min-width: 992px) {
   .hero-illustration-layout {
@@ -603,4 +698,59 @@ button {
 .mobile-menu-link.api-btn {
   background-color: var(--primary-color);
   color: white;
+}
+
+@media (min-width: 992px) {
+  .hero-section {
+    padding-top: 3rem;
+    min-height: 85vh; /* Even shorter on desktop */
+  }
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px; 
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(102, 16, 242, 0.1) 100%);
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+    z-index: 0;
+  }
+}
+.hero-text-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Enhance title for better visibility */
+.hero-title {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+}
+
+/* Add subtle accent elements */
+.hero-title::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 30px;
+  height: 30px;
+  border-top: 3px solid var(--primary-color);
+  border-left: 3px solid var(--primary-color);
+  opacity: 0.7;
+}
+
+.hero-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  border-bottom: 3px solid var(--secondary-color);
+  border-right: 3px solid var(--secondary-color);
+  opacity: 0.7;
 }
