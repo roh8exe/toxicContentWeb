@@ -5,44 +5,60 @@ import './ModelComparison.css';
 const ModelComparison = () => {
   const modelData = {
     hindi: {
-      unityAI: 84,
+      unityAI: 86.63,
       perspective: 84,
       llamaGuard: 60,
-      mBERT: 82.52,
-      llama32: 83.99,
-      ayaExpanse: "No Support"
+     // mBERT: 82.52,
+    //  llama32: 83.99,
+     // ayaExpanse: 86.63
     },
     telugu: {
-      unityAI: 88,
+      unityAI: 88.54,
       perspective: "No Support",
       llamaGuard: "No Support",
-      mBERT: 93.10,
-      llama32: 88.48,
-      ayaExpanse: "No Support"
+    //  mBERT: 93.10,
+     // llama32: 88.48,
+     // ayaExpanse: 88.18
     },
     punjabi: {
-      unityAI: 80,
+      unityAI: 80.29,
       perspective: "No Support",
       llamaGuard: "No Support",
-      mBERT: 76.50,
-      llama32: 80.29,
-      ayaExpanse: "No Support"
+     // mBERT: 76.50,
+     // llama32: 80.29,
+      //ayaExpanse: 80.14
     },
     marathi: {
-      unityAI: 89,
+      unityAI: 89.39,
       perspective: "No Support",
       llamaGuard: "No Support",
-      mBERT: 86.76,
-      llama32: 89.37,
-      ayaExpanse: "No Support"
+     // mBERT: 86.76,
+     // llama32: 89.37,
+     // ayaExpanse: 89.39
     },
     urdu: {
-      unityAI: 84,
+      unityAI: 87.06,
       perspective: "No Support",
       llamaGuard: "No Support",
-      mBERT: 82.20,
-      llama32: 84.45,
-      ayaExpanse: "No Support"
+      //mBERT: 82.20,
+     // llama32: 84.45,
+     // ayaExpanse: 87.06
+    },
+    gujarati: {
+      unityAI: 99.21,
+      perspective: "No Support",
+      llamaGuard: "No Support",
+     // mBERT: 99.76,
+     //llama32: 99.03,
+     // ayaExpanse: 99.21
+    },
+    tamil: {
+      unityAI: "na",
+      perspective: "No Support",
+      llamaGuard: "No Support",
+     // mBERT: 99.76,
+     //llama32: 99.03,
+     // ayaExpanse: 99.21
     }
   };
 
@@ -64,14 +80,14 @@ const ModelComparison = () => {
   const modelMetadata = {
     unityAI: { icon: Award, name: "UnityAI-Guard", shortName: "UnityAI-Guard" },
     llamaGuard: { icon: TrendingUp, name: "LLaMA Guard", shortName: "LLaMA Guard" },
-    mBERT: { icon: Server, name: "mBERT", shortName: "mBERT" },
-    llama32: { icon: Cpu, name: "Llama-3.2-1B", shortName: "Llama-3.2-1B" },
+   // mBERT: { icon: Server, name: "mBERT", shortName: "mBERT" },
+   // llama32: { icon: Cpu, name: "Llama-3.2-1B", shortName: "Llama-3.2-1B" },
     perspective: { icon: Globe, name: "Perspective API", shortName: "Perspective API" },
-    ayaExpanse: { icon: Zap, name: "Aya-Expanse-8B", shortName: "Aya-Expanse-8B" }
+   // ayaExpanse: { icon: Zap, name: "Aya-Expanse-8B", shortName: "Aya-Expanse-8B" }
   };
 
   // Order the models in a specific sequence
-  const modelOrder = ['unityAI', 'llama32', 'mBERT', 'llamaGuard', 'perspective', 'ayaExpanse'];
+  const modelOrder = ['unityAI',  'llamaGuard', 'perspective'];
 
   return (
     <div className="model-comparison-section">
